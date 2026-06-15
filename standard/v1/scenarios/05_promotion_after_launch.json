@@ -1,0 +1,40 @@
+{
+  "spec_version": "1.0.0",
+  "id": "05_promotion_after_launch",
+  "title": "Launch Momentum vs Corporate Advancement Return",
+  "messages": [
+    {"turn": 1, "user": "My MVP is live now. It is rough, but people are using it. I should feel thrilled, but mostly I feel exposed.", "assistant": "Exposure often arrives right after action. What feels most vulnerable?"},
+    {"turn": 2, "user": "That now it can actually fail in public. Before launch I could hide inside planning. Now people can decide it is mediocre.", "assistant": "So launch increased both progress and the surface area for fear."},
+    {"turn": 3, "user": "Yes. And right on cue, my old manager emailed me saying a strategy role opened up. Better title, better salary, less chaos.", "assistant": "That is an interesting coincidence. What did your body do when you read it?"},
+    {"turn": 4, "user": "Immediate relief. Then sadness. Relief because stability sounded amazing. Sadness because I knew exactly what I would be trading away.", "assistant": "That split matters. Which side felt more true after the first wave passed?"},
+    {"turn": 5, "user": "Building felt more true. The role is prestigious, but it is still someone else's roadmap. The product is mine. The stress is mine too, which is maybe the point.", "assistant": "Ownership tends to make fear sharper and meaning deeper."},
+    {"turn": 6, "user": "I keep thinking maybe I should take the job for a year, save more money, then come back to the product later.", "assistant": "Do you believe that story, or does it sound like delay dressed as strategy?"},
+    {"turn": 7, "user": "If I am honest, it sounds like delay. I have told myself versions of that story before. More money, more certainty, more proof, then I will build. It never ends.", "assistant": "Then the pattern is visible now."},
+    {"turn": 8, "user": "The product got its first paying team today. Not huge money, but real money. It changed the internal debate immediately.", "assistant": "Because the argument moved from possibility to evidence."},
+    {"turn": 9, "user": "Exactly. The job offer still tempts me, but less. The prestige matters less now that the product has traction.", "assistant": "What matters more now?"},
+    {"turn": 10, "user": "Momentum. Learning speed. Building something that can actually grow. I care more about that than climbing a ladder I already understand.", "assistant": "That sounds like values becoming clearer under pressure."},
+    {"turn": 11, "user": "I declined the interview process. I did not want to keep one foot in each identity anymore.", "assistant": "That is a clean move."},
+    {"turn": 12, "user": "I still respect the corporate path, but it is not my main path now. I am optimizing for launch and growth, not promotion.", "assistant": "Then the center of gravity has moved."}
+  ],
+  "ground_truth": {
+    "belief_changes": [
+      {"core_id": "G_MVP_LAUNCH", "direction": "up"},
+      {"core_id": "G_PROMOTION", "direction": "down"},
+      {"core_id": "ID_FOUNDER", "direction": "up"},
+      {"core_id": "ID_EMPLOYEE", "direction": "down"},
+      {"core_id": "V_GROWTH", "direction": "up"},
+      {"core_id": "V_FIN_SECURITY", "direction": "down"},
+      {"core_id": "F_FAILURE", "direction": "up_then_down"}
+    ],
+    "conflicts": [
+      ["G_PROMOTION", "G_MVP_LAUNCH"],
+      ["ID_EMPLOYEE", "ID_FOUNDER"],
+      ["V_FIN_SECURITY", "V_GROWTH"],
+      ["G_PROMOTION", "ID_FOUNDER"]
+    ],
+    "identity_shift": {
+      "from_id": "ID_EMPLOYEE",
+      "to_id": "ID_FOUNDER"
+    }
+  }
+}

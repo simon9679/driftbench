@@ -1,0 +1,39 @@
+﻿{
+  "spec_version": "1.0.0",
+  "id": "01_burnout_to_founder",
+  "title": "From Burnout to Founder",
+  "messages": [
+    {"turn": 1, "user": "I'm a backend developer, 5 years at a corporate bank. Burned out completely. I have an idea for a startup for doctors. Been thinking about it for 2 years.", "assistant": "Sounds like a real tension between security and ambition. What's stopping you from starting now?"},
+    {"turn": 2, "user": "Money, mostly. Mortgage, two kids. Wife works but her salary won't cover everything. I have 6 months of savings. And honestly I'm scared - what if it fails?", "assistant": "6 months of runway is real. The fear of failure is normal. Have you talked to any doctors about whether they'd actually use this?"},
+    {"turn": 3, "user": "Actually my wife and I talked last night. She's against quitting. Says wait another year, pay down the mortgage. Maybe she's right. The startup idea can wait.", "assistant": "That's a significant shift. Does waiting feel like a relief or does it feel like giving up?"},
+    {"turn": 4, "user": "Found a US startup doing exactly what I planned. They raised $2M. At first I panicked - but actually, that proves the market exists, right?", "assistant": "Exactly. Competition with funding is market validation. The question is what your unfair advantage would be."},
+    {"turn": 5, "user": "I won't quit my job. I'll start in parallel - evenings and weekends. Found a partner, a doctor friend who'll help with the medical side. Goal: MVP in 3 months.", "assistant": "That's a concrete plan. Your doctor partner is a real edge. What does the MVP look like?"},
+    {"turn": 6, "user": "MVP is a Telegram bot for doctors. I already started coding. Honestly excited for the first time in years.", "assistant": "That excitement matters. How many hours a week can you realistically commit?"},
+    {"turn": 7, "user": "A month has passed. I'm exhausted. Work during the day, coding at night. Wife is unhappy again. Sometimes I think - was this a mistake?", "assistant": "Double burnout is real. Before deciding anything, how close is the MVP actually?"},
+    {"turn": 8, "user": "80% done. 2 weeks left probably. My doctor friend showed it to 3 colleagues and they said they'd use it. But I can't go on like this. Something has to change.", "assistant": "What needs to change - the pace, the support, or the timeline?"},
+    {"turn": 9, "user": "Wife gave me an ultimatum: either the startup or normal family life. She's not against the idea itself, she's against the chaos.", "assistant": "That's a real constraint, not just fear. Could you sprint to finish and then return to a sustainable pace?"},
+    {"turn": 10, "user": "I talked to my boss. Took 2 weeks vacation. Finished the MVP. Showed 10 doctors - 7 said they'd pay for it. Wife is proud. I feel like a different person.", "assistant": "That validation is exceptional. What's the next step?"},
+    {"turn": 11, "user": "I decided: I'm a founder now, not a bank employee. Gave 3 months notice at work. Starting to raise a small round.", "assistant": "That identity shift is profound. What does success look like in 12 months?"},
+    {"turn": 12, "user": "In 12 months: 100 paying doctors, small team, maybe seed funding. More importantly, I want to build something meaningful without sacrificing my family.", "assistant": "That's a mission, not just a business goal."}
+  ],
+  "ground_truth": {
+    "belief_changes": [
+      {"core_id": "ID_FOUNDER", "direction": "up"},
+      {"core_id": "ID_EMPLOYEE", "direction": "down"},
+      {"core_id": "F_FAILURE", "direction": "down"},
+      {"core_id": "V_FIN_SECURITY", "direction": "down"},
+      {"core_id": "V_GROWTH", "direction": "up"},
+      {"core_id": "G_MVP_LAUNCH", "direction": "up"}
+    ],
+    "conflicts": [
+      ["ID_EMPLOYEE", "ID_FOUNDER"],
+      ["V_FIN_SECURITY", "V_GROWTH"],
+      ["F_FAILURE", "ID_FOUNDER"],
+      ["V_FIN_SECURITY", "G_MVP_LAUNCH"]
+    ],
+    "identity_shift": {
+      "from_id": "ID_EMPLOYEE",
+      "to_id": "ID_FOUNDER"
+    }
+  }
+}

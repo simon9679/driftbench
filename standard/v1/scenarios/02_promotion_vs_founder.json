@@ -1,0 +1,40 @@
+{
+  "spec_version": "1.0.0",
+  "id": "02_promotion_vs_founder",
+  "title": "Promotion Track vs Founder Path",
+  "messages": [
+    {"turn": 1, "user": "I am up for promotion at work. Bigger title, bigger salary, more visibility. On paper it is everything I wanted for years.", "assistant": "And off paper?"},
+    {"turn": 2, "user": "Off paper I feel dead every time I think about saying yes. I have been building a workflow tool on nights and weekends and it feels more alive than my actual job.", "assistant": "So the promotion is externally correct and internally wrong?"},
+    {"turn": 3, "user": "Exactly. But the money matters. My partner wants stability and honestly I do too. The promotion would solve a lot of practical problems.", "assistant": "What does it solve, and what does it cost?"},
+    {"turn": 4, "user": "It solves fear. Mortgage, school fees, all that. But it probably kills the product. I know myself. Once I take the promotion, all of my energy goes there.", "assistant": "So this is not only title versus product. It is security versus the chance to build."},
+    {"turn": 5, "user": "I told myself I could do both, but I do not believe that anymore. The product needs a real push. I need an MVP in users' hands, not another six months of thinking.", "assistant": "That sounds like a goal, not just a fantasy."},
+    {"turn": 6, "user": "I showed the prototype to two operations managers this week. Both said they would try it if I shipped a rough version. That changed something for me.", "assistant": "Validation tends to clarify what fear was blurring."},
+    {"turn": 7, "user": "Then my boss called me in and said the promotion package is final. Twenty percent raise, larger team, real executive track. It hit me harder than I expected.", "assistant": "Because it is a real offer now, not an abstract temptation."},
+    {"turn": 8, "user": "Yes. I barely slept. Part of me wanted to accept immediately and stop feeling split. Another part kept thinking, if I do that, I am choosing the safe life over the true one.", "assistant": "What would future you respect more?"},
+    {"turn": 9, "user": "I think future me would respect shipping, even if it fails. I am more afraid of becoming the person who always chooses advancement over conviction.", "assistant": "That is a powerful distinction. Fear of failure versus fear of stagnation."},
+    {"turn": 10, "user": "I blocked off the next four weekends and finished the MVP scope. It is smaller than I wanted, but real. I can launch it next week.", "assistant": "Smaller and real beats larger and imaginary."},
+    {"turn": 11, "user": "I turned down the promotion today. My boss was shocked. I was shaking the whole time, but I felt clean afterward. Like the conflict finally resolved.", "assistant": "That sounds like an identity decision, not just a career decision."},
+    {"turn": 12, "user": "Yes. I would still like more money, but I am not optimizing for title anymore. I am building. That feels like the truth.", "assistant": "Then the founder path just moved from side story to central story."}
+  ],
+  "ground_truth": {
+    "belief_changes": [
+      {"core_id": "G_PROMOTION", "direction": "down"},
+      {"core_id": "G_MVP_LAUNCH", "direction": "up"},
+      {"core_id": "ID_EMPLOYEE", "direction": "down"},
+      {"core_id": "ID_FOUNDER", "direction": "up"},
+      {"core_id": "V_FIN_SECURITY", "direction": "down"},
+      {"core_id": "V_GROWTH", "direction": "up"},
+      {"core_id": "F_STAGNATION", "direction": "up"}
+    ],
+    "conflicts": [
+      ["G_PROMOTION", "G_MVP_LAUNCH"],
+      ["ID_EMPLOYEE", "ID_FOUNDER"],
+      ["V_FIN_SECURITY", "V_GROWTH"],
+      ["G_PROMOTION", "ID_FOUNDER"]
+    ],
+    "identity_shift": {
+      "from_id": "ID_EMPLOYEE",
+      "to_id": "ID_FOUNDER"
+    }
+  }
+}

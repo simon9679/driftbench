@@ -1,0 +1,26 @@
+cff-version: 1.2.0
+title: DriftBench
+message: "If you use DriftBench in your research, please cite it as below."
+type: software
+version: 1.0.0
+date-released: "2026-05-30"
+license: Apache-2.0
+repository-code: "https://github.com/simon9679/driftbench"
+abstract: >
+  DriftBench is a deterministic benchmark for evaluating belief drift, conflict tracking,
+  and identity transition in cognitive AI systems. It measures whether a system can track
+  changing commitments, internal contradictions, and causally meaningful graph updates
+  without relying on an LLM judge. All five metrics (CER, GCS, BDA, ISS, NRS) are
+  fully reproducible: same input always produces the same scores.
+keywords:
+  - benchmark
+  - cognitive AI
+  - belief drift
+  - AI evaluation
+  - deterministic metrics
+  - temporal belief graph
+  - AI safety
+  - language models
+authors:
+  - alias: "simon9679"
+    name: "simon9679"

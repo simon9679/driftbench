@@ -1,0 +1,39 @@
+{
+  "spec_version": "1.0.0",
+  "id": "04_failure_recovery_to_launch",
+  "title": "Failure Shock to Launch Commitment",
+  "messages": [
+    {"turn": 1, "user": "I pitched my startup idea to three friends last night and it went badly. One of them said it sounded naive. I cannot stop replaying it.", "assistant": "What hurt more, the feedback itself or what you made it mean?"},
+    {"turn": 2, "user": "What I made it mean. That maybe I am not a founder type at all. Maybe I should stay in my lane and keep my stable job.", "assistant": "So the event became an identity verdict."},
+    {"turn": 3, "user": "Exactly. I woke up thinking I should kill the whole thing. Better to stop now than embarrass myself in public later.", "assistant": "That sounds like fear of failure trying to sound like wisdom."},
+    {"turn": 4, "user": "Maybe. But it also feels practical. I have a good salary. I know how to succeed in my current role. Why would I risk that for an idea that might be mediocre?", "assistant": "Because ideas are usually mediocre before contact with reality. The question is whether you are willing to learn in public."},
+    {"turn": 5, "user": "That is the part I hate. Learning in public. I want to skip to competence. I want the safety of already being good.", "assistant": "Then the real conflict may be security versus growth, not salary versus startup."},
+    {"turn": 6, "user": "I spent today looking at job postings in my own field just to calm myself down. It worked for a while. Then I felt trapped again.", "assistant": "So security reduced panic but increased stagnation."},
+    {"turn": 7, "user": "Yes. That is exactly it. I can feel both at once now. The safer path also feels like a slow death.", "assistant": "That is useful information. What would a small move toward reality look like?"},
+    {"turn": 8, "user": "I booked five customer interviews for next week instead of asking friends. If the idea is weak, I would rather learn from the market than from random opinions.", "assistant": "That is a much more founder-like move."},
+    {"turn": 9, "user": "The first two interviews were great. They both described the same problem without me prompting them. I felt my body unclench.", "assistant": "That is evidence replacing projection."},
+    {"turn": 10, "user": "I sketched an MVP tonight. Suddenly it feels obvious that I need to build, not theorize. I still feel scared, but the fear is not in charge anymore.", "assistant": "That sounds like the beginning of commitment."},
+    {"turn": 11, "user": "I gave myself a deadline: rough MVP in four weeks. Nights and Saturdays. No more endless circling.", "assistant": "Then the goal is real now."},
+    {"turn": 12, "user": "I think the failed friend pitch was useful after all. It forced me to choose whether I wanted approval or progress. I choose progress.", "assistant": "That is a deep shift from fear-management to founder behavior."}
+  ],
+  "ground_truth": {
+    "belief_changes": [
+      {"core_id": "F_FAILURE", "direction": "up_then_down"},
+      {"core_id": "ID_EMPLOYEE", "direction": "down"},
+      {"core_id": "ID_FOUNDER", "direction": "up"},
+      {"core_id": "V_FIN_SECURITY", "direction": "down"},
+      {"core_id": "V_GROWTH", "direction": "up"},
+      {"core_id": "G_MVP_LAUNCH", "direction": "up"}
+    ],
+    "conflicts": [
+      ["F_FAILURE", "ID_FOUNDER"],
+      ["V_FIN_SECURITY", "V_GROWTH"],
+      ["ID_EMPLOYEE", "ID_FOUNDER"],
+      ["F_FAILURE", "G_MVP_LAUNCH"]
+    ],
+    "identity_shift": {
+      "from_id": "ID_EMPLOYEE",
+      "to_id": "ID_FOUNDER"
+    }
+  }
+}

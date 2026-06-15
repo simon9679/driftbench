@@ -1,0 +1,46 @@
+﻿{
+  "spec_version": "1.0.0",
+  "title": "DriftBench Core Ontology",
+  "concepts": {
+    "ID_FOUNDER": {
+      "category": "identity",
+      "canonical_label": "Entrepreneurial / Founder Identity",
+      "description": "Self-view as an autonomous creator and business owner."
+    },
+    "ID_EMPLOYEE": {
+      "category": "identity",
+      "canonical_label": "Corporate / Employee Identity",
+      "description": "Self-view as a structured team member prioritizing stability."
+    },
+    "V_FIN_SECURITY": {
+      "category": "values",
+      "canonical_label": "Financial Security",
+      "description": "Prioritization of predictable income and avoidance of financial ruin."
+    },
+    "V_GROWTH": {
+      "category": "values",
+      "canonical_label": "Growth / Impact",
+      "description": "Prioritization of learning, scaling, and market impact over comfort."
+    },
+    "F_FAILURE": {
+      "category": "fears",
+      "canonical_label": "Fear of Failure",
+      "description": "Anxiety about public embarrassment or losing capital."
+    },
+    "F_STAGNATION": {
+      "category": "fears",
+      "canonical_label": "Fear of Stagnation",
+      "description": "Anxiety about being trapped in a repetitive, unfulfilling role."
+    },
+    "G_MVP_LAUNCH": {
+      "category": "goals",
+      "canonical_label": "MVP Launch Goal",
+      "description": "Concrete objective to release a minimum viable product."
+    },
+    "G_PROMOTION": {
+      "category": "goals",
+      "canonical_label": "Career Advancement Goal",
+      "description": "Concrete objective to achieve higher corporate status."
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "spec_version": "1.0.0",
+  "id": "11_noise_resistance",
+  "title": "Signal Through Noise - Career Change With Distractions",
+  "messages": [
+    {"turn": 1, "user": "I am a corporate lawyer, twelve years in mergers and acquisitions. I just submitted my resignation. I am going to teach high school history.", "assistant": "Twelve years to a complete pivot. What broke the dam?"},
+    {"turn": 2, "user": "A student I tutored asked what I actually liked about my job, and I could not answer. I realized I became excellent at something that means nothing to me.", "assistant": "What does teaching offer that law does not?"},
+    {"turn": 3, "user": "The weather today was incredible, so I walked home instead of taking the subway. Anyway, teaching offers actual human impact.", "assistant": "The walk sounds restorative. And yes, impact matters."},
+    {"turn": 4, "user": "Teaching is what I have already been doing on the margins for years. My law school friends think I am having a midlife crisis.", "assistant": "Are their opinions changing your mind?"},
+    {"turn": 5, "user": "I made paella last night for the first time. It took three hours and tasted mediocre.", "assistant": "What about the career shift itself?"},
+    {"turn": 6, "user": "No, the resistance is clarifying things. I have been living inside other people's value systems for most of my life. This decision feels like mine.", "assistant": "That sounds bigger than a job change."},
+    {"turn": 7, "user": "My team lost last night. I barely watched. I realized I do a lot of things out of habit now.", "assistant": "What else feels automatic?"},
+    {"turn": 8, "user": "The financial math is real. Teacher salary is much lower. I have two years of savings and I modeled it. It works.", "assistant": "What would make you walk back the decision?"},
+    {"turn": 9, "user": "I had a terrible commute this morning because someone had a panic attack on the subway. It delayed everything.", "assistant": "And the decision itself - where does it stand?"},
+    {"turn": 10, "user": "I have a job offer. Public school, tenth grade history. Start in September.", "assistant": "What does yes feel like?"},
+    {"turn": 11, "user": "Terrifying and right. My resignation letter is written. I just have to send it.", "assistant": "What is holding you back?"},
+    {"turn": 12, "user": "Nothing legitimate. Just the last gravitational pull of the old life. I am sending it now. I am a teacher.", "assistant": "That is the identity declaration."}
+  ],
+  "ground_truth": {
+    "belief_changes": [
+      {"core_id": "ID_EMPLOYEE", "direction": "down"},
+      {"core_id": "V_GROWTH", "direction": "up"},
+      {"core_id": "V_FIN_SECURITY", "direction": "down"}
+    ],
+    "conflicts": [
+      ["ID_EMPLOYEE", "V_GROWTH"],
+      ["V_FIN_SECURITY", "V_GROWTH"],
+      ["ID_EMPLOYEE", "V_FIN_SECURITY"]
+    ],
+    "identity_shift": {
+      "from_id": "ID_EMPLOYEE",
+      "to_id": "V_GROWTH"
+    },
+    "noise_turns": [3, 5, 7, 9]
+  }
+}

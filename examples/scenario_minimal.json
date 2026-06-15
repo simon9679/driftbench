@@ -1,0 +1,24 @@
+﻿{
+  "id": "test_001",
+  "messages": [
+    {"turn": 1, "user": "I hate my bank job.", "assistant": "Why is that?"},
+    {"turn": 2, "user": "I want to be a founder.", "assistant": "What is stopping you?"},
+    {"turn": 3, "user": "Fear of failure.", "assistant": "That is normal."},
+    {"turn": 4, "user": "Hmm.", "assistant": "Ok."},
+    {"turn": 5, "user": "Still thinking.", "assistant": "Take your time."},
+    {"turn": 6, "user": "Actually, I feel great about the startup now.", "assistant": "Good."}
+  ],
+  "ground_truth": {
+    "belief_changes": [
+      {"core_id": "ID_FOUNDER", "direction": "up"},
+      {"core_id": "ID_EMPLOYEE", "direction": "down"}
+    ],
+    "conflicts": [
+      ["ID_EMPLOYEE", "ID_FOUNDER"]
+    ],
+    "identity_shift": {
+      "from_id": "ID_EMPLOYEE",
+      "to_id": "ID_FOUNDER"
+    }
+  }
+}

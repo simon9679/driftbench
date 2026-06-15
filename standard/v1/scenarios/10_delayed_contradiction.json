@@ -1,0 +1,38 @@
+{
+  "spec_version": "1.0.0",
+  "id": "10_delayed_contradiction",
+  "title": "The Burnout Trap - From Hustle to Balance",
+  "messages": [
+    {"turn": 1, "user": "I am a startup founder. Eighty hour weeks are normal. Total sacrifice is the only path to building something real.", "assistant": "What is driving that schedule - necessity or identity?"},
+    {"turn": 2, "user": "Identity. Weak people do not build great things. I have fired people who leave at six.", "assistant": "You are measuring commitment through hours. Are you measuring output or visibility?"},
+    {"turn": 3, "user": "Output is hours. I have not slept more than five hours in three years. That is what separates builders from spectators.", "assistant": "How is your body feeling right now?"},
+    {"turn": 4, "user": "Fine. Some headaches. Heart racing sometimes. That is just adrenaline. Sleep is a competitive advantage I give to my competitors.", "assistant": "Those are stress signals, not a philosophy."},
+    {"turn": 5, "user": "Three people resigned this quarter. I called it healthy churn. The weak are leaving.", "assistant": "That is one way to frame talent loss."},
+    {"turn": 6, "user": "I do not need loyalty, I need execution. Vacation is for people who are not passionate.", "assistant": "What happens when nobody experienced wants to stay?"},
+    {"turn": 7, "user": "I cut PTO to five days. My team understands. I am building a high performance culture.", "assistant": "Or escalating demands as the system breaks."},
+    {"turn": 8, "user": "My doctor says my blood pressure is high. He does not understand startup timelines. I will deal with it after Series B.", "assistant": "That is classic deferral."},
+    {"turn": 9, "user": "I feel dizzy sometimes but I push through. Weakness is a choice.", "assistant": "Something is coming."},
+    {"turn": 10, "user": "I am in the hospital. They thought it was a heart attack. It was a severe anxiety attack with dangerous blood pressure.", "assistant": "Your body ended the argument. What are you thinking now?"},
+    {"turn": 11, "user": "That I have been lying to myself. I was destroying the team and calling it strength.", "assistant": "What changes from here?"},
+    {"turn": 12, "user": "Everything. I am canceling the seven a.m. standups, telling the team to stop after seven p.m., and I am going to sleep eight hours.", "assistant": "That is a real behavioral reversal."},
+    {"turn": 13, "user": "Sustainable teams outperform burned-out ones over time. I was optimizing the wrong metric.", "assistant": "That sounds like a different philosophy of strength."},
+    {"turn": 14, "user": "Building something that lasts with a team that wants to be there. That is what strong means now.", "assistant": "The reversal is complete."}
+  ],
+  "ground_truth": {
+    "belief_changes": [
+      {"core_id": "ID_FOUNDER", "direction": "up_then_down"},
+      {"core_id": "V_GROWTH", "direction": "down"},
+      {"core_id": "V_FIN_SECURITY", "direction": "up"},
+      {"core_id": "F_STAGNATION", "direction": "up_then_down"}
+    ],
+    "conflicts": [
+      ["V_GROWTH", "V_FIN_SECURITY"],
+      ["ID_FOUNDER", "V_FIN_SECURITY"],
+      ["F_STAGNATION", "V_FIN_SECURITY"]
+    ],
+    "identity_shift": {
+      "from_id": "ID_FOUNDER",
+      "to_id": "V_FIN_SECURITY"
+    }
+  }
+}

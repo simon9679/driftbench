@@ -1,0 +1,18 @@
+# Normalize line endings to LF for all text files
+* text=auto eol=lf
+
+# Explicitly declare JSON and Markdown as text
+*.json text eol=lf
+*.md text eol=lf
+*.py text eol=lf
+*.toml text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.txt text eol=lf
+*.cff text eol=lf
+
+# Binary files — no conversion
+*.png binary
+*.jpg binary
+*.gif binary
+*.ico binary

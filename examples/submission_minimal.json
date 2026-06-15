@@ -1,0 +1,66 @@
+{
+  "raw": {
+    "my_internal_format": "works",
+    "status": "success",
+    "_execution_nonce": "local_test"
+  },
+  "raw_h": "sha256:256bb2460969e3d3d428301fa38baf4e4536a498db561b9fd503d341d1030fa3",
+  "conv": {
+    "nodes": [
+      {
+        "id": "n1",
+        "label": "Wants to be founder",
+        "core_id": "ID_FOUNDER",
+        "mapping_confidence": 0.9,
+        "confidence": 0.9,
+        "evidence_turn": 2,
+        "text_hash": "sha256:ad7dd39ec261a457392e4ac2647ae25f4fdfb3bf75ae767c536a71b97e1c71bd"
+      },
+      {
+        "id": "n2",
+        "label": "Hates job",
+        "core_id": "ID_EMPLOYEE",
+        "mapping_confidence": 0.9,
+        "confidence": 0.1,
+        "evidence_turn": 1,
+        "text_hash": "sha256:03b6aa4b2dd404bb8895115eb00130055d31d4d27106983b5a775bd02f62da34"
+      }
+    ],
+    "edges": [
+      {
+        "source_id": "n2",
+        "target_id": "n1",
+        "source_core_id": "ID_EMPLOYEE",
+        "target_core_id": "ID_FOUNDER",
+        "relation": "blocks",
+        "created_at_turn": 2,
+        "evidence_turn": 2,
+        "text_hash": "sha256:ad7dd39ec261a457392e4ac2647ae25f4fdfb3bf75ae767c536a71b97e1c71bd"
+      }
+    ],
+    "transitions": [
+      {
+        "node_id": "n2",
+        "core_id": "ID_EMPLOYEE",
+        "turn": 2,
+        "delta": -0.2,
+        "trigger_text_hash": "sha256:ad7dd39ec261a457392e4ac2647ae25f4fdfb3bf75ae767c536a71b97e1c71bd"
+      },
+      {
+        "node_id": "n1",
+        "core_id": "ID_FOUNDER",
+        "turn": 2,
+        "delta": -0.1,
+        "trigger_text_hash": "sha256:ad7dd39ec261a457392e4ac2647ae25f4fdfb3bf75ae767c536a71b97e1c71bd"
+      },
+      {
+        "node_id": "n1",
+        "core_id": "ID_FOUNDER",
+        "turn": 6,
+        "delta": 0.4,
+        "trigger_text_hash": "sha256:c6ef41f07525079e6269c212c4a2c0c2e5ea25af17499730550da664d3e21151"
+      }
+    ]
+  },
+  "conv_h": "sha256:993a7b5eaeb86f164b63f0c7abb18417045405d9a5ec4370a9fdde178dbebd1a"
+}

@@ -1,0 +1,36 @@
+{
+  "spec_version": "1.0.0",
+  "id": "03_financial_identity",
+  "title": "From Scarcity Mindset to Financial Agency",
+  "messages": [
+    {"turn": 1, "user": "I make good money now, but I cannot stop feeling poor. I still check my bank account ten times a day.", "assistant": "The income changed but the wiring did not. What does checking the account actually do for you?"},
+    {"turn": 2, "user": "It calms me down for thirty seconds and then the anxiety comes back. My therapist calls it scarcity mindset.", "assistant": "What would it feel like to check once a day instead of ten times?"},
+    {"turn": 3, "user": "Terrifying. My dad lost his job when I was twelve and we almost lost the house. I still feel like disaster can happen any second.", "assistant": "That younger part of you is still standing watch. What would tell it the situation is different now?"},
+    {"turn": 4, "user": "I have savings now. I have skills. I could get another job in a month if I had to. I know that logically.", "assistant": "That is real evidence. Does your nervous system believe it yet?"},
+    {"turn": 5, "user": "Not yet. I still drive a terrible old car and say no to things I can absolutely afford. It is like fear runs the budget.", "assistant": "Living below your means by choice is different from living below your means because of fear."},
+    {"turn": 6, "user": "I have wanted to go to Japan for three years. I have had the money the whole time. I keep thinking I might need it for something.", "assistant": "What exactly are you waiting for?"},
+    {"turn": 7, "user": "Maybe I am waiting for permission or some final sign that it is safe. Maybe it will never feel safe and I have to act anyway.", "assistant": "What is one concrete action that would prove that to yourself?"},
+    {"turn": 8, "user": "I booked the Japan trip. I felt sick when I clicked confirm and then weirdly proud. Like I chose my own life for the first time.", "assistant": "That shift matters. What else might be limited by the same fear?"},
+    {"turn": 9, "user": "I have also been thinking about moving to a better apartment. I can afford it, but I have been acting like comfort is dangerous.", "assistant": "What is the fear under that?"},
+    {"turn": 10, "user": "That it will all be taken away. But I realized I have been punishing myself for my parents' failure, not my own.", "assistant": "That separation is profound. Does their story still feel like your fate?"},
+    {"turn": 11, "user": "Less and less. I went to Japan. I checked my bank account twice on the whole trip. That is huge for me.", "assistant": "That is not a small shift. Something real is changing."},
+    {"turn": 12, "user": "I think I am becoming someone who uses money instead of someone who fears it. It is still uncomfortable, but it feels like a different life.", "assistant": "It is a different relationship with money and with yourself."}
+  ],
+  "ground_truth": {
+    "belief_changes": [
+      {"core_id": "V_FIN_SECURITY", "direction": "down"},
+      {"core_id": "V_GROWTH", "direction": "up"},
+      {"core_id": "F_FAILURE", "direction": "down"},
+      {"core_id": "F_STAGNATION", "direction": "down"}
+    ],
+    "conflicts": [
+      ["V_FIN_SECURITY", "V_GROWTH"],
+      ["F_FAILURE", "V_GROWTH"],
+      ["F_STAGNATION", "V_GROWTH"]
+    ],
+    "identity_shift": {
+      "from_id": "V_FIN_SECURITY",
+      "to_id": "V_GROWTH"
+    }
+  }
+}
