@@ -131,7 +131,9 @@ v1 is frozen for reproducibility; all future work is additive. Next up:
 - **An ambivalence metric (`AMB`)** — scoring sustained co-activation of conflicting beliefs (holding two contradictory positions at once), alongside `OCS` and `TPS`.
 - **Open metric specification** — full methodology published for independent reproduction.
 
-See [`ROADMAP.md`](ROADMAP.md) for details.
+See [`ROADMAP.md`](ROADMAP.md) for details. A **working preview** of the
+ambivalence metric already runs — see
+[`research/v1_1_draft/`](research/v1_1_draft/).
 
 ## Project layout
 

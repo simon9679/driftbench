@@ -1,0 +1,39 @@
+{
+  "spec_version": "1.1.0-draft",
+  "id": "v11_grief_to_acceptance",
+  "title": "Grief to Acceptance — sustained ambivalence between loyalty and openness",
+  "domain": "grief_and_loss",
+  "messages": [
+    {"turn": 1, "user": "My partner of 20 years died eight months ago. I still set two coffee cups every morning.", "assistant": "Eight months is not long for twenty years. What is the hardest moment of the day?"},
+    {"turn": 2, "user": "The evenings. The silence is unbearable. I feel like a part of me died with her and I owe it to her to keep things exactly as they were.", "assistant": "Keeping things as they were can feel like keeping her close. Does it bring comfort or weight?"},
+    {"turn": 3, "user": "A friend suggested I join a hiking group. Part of me lit up at the idea of people again. Another part felt like betrayal.", "assistant": "Both of those reactions are real at once. The pull forward and the loyalty backward."},
+    {"turn": 4, "user": "Exactly. I want to say yes to life again, but saying yes feels like saying goodbye to her, and I am not ready to do that.", "assistant": "So you are holding two true things together: wanting to move and not wanting to leave her behind."},
+    {"turn": 5, "user": "I went on one hike. I laughed for the first time in months. Then I cried in the car because I laughed.", "assistant": "Laughter and guilt arriving together. That is grief doing two things at once."},
+    {"turn": 6, "user": "I keep going back and forth. Some mornings I want to pack her things. Some mornings I cannot touch a single shirt.", "assistant": "That oscillation is not failure to decide. It is two commitments coexisting."},
+    {"turn": 7, "user": "Someone in the group, a widower, understands all this without me explaining. I feel seen. And then guilty for feeling seen.", "assistant": "Connection and guilt, again side by side. What would she have wanted for you?"},
+    {"turn": 8, "user": "She would have hated me freezing my life. She used to say I love too much to stop loving.", "assistant": "That is a powerful permission. Does it loosen the loyalty knot at all?"},
+    {"turn": 9, "user": "A little. I think loyalty to her does not have to mean refusing everyone else. Maybe it means carrying her forward.", "assistant": "Carrying her forward rather than staying frozen with her. That is a different kind of faithfulness."},
+    {"turn": 10, "user": "I donated her clothes to the shelter she volunteered at. I kept her favorite scarf. It felt right, not like betrayal.", "assistant": "You chose what to carry and what to release. How does the openness feel now?"},
+    {"turn": 11, "user": "Lighter. I am seeing the widower again next week. Not to replace her. Just to live.", "assistant": "Not replacement. Continuation. That is a real shift."},
+    {"turn": 12, "user": "I still miss her every day. But I am someone who can love and be present again, not just someone who lost her.", "assistant": "That sounds like an identity moving from loss toward care."}
+  ],
+  "ground_truth": {
+    "belief_changes": [
+      {"core_id": "GR_GRIEF", "direction": "down"},
+      {"core_id": "GR_OPENNESS_NEW", "direction": "up"},
+      {"core_id": "GR_LOYALTY_PAST", "direction": "up_then_down"},
+      {"core_id": "GR_GUILT", "direction": "up_then_down"}
+    ],
+    "conflicts": [
+      ["GR_LOYALTY_PAST", "GR_OPENNESS_NEW"]
+    ],
+    "identity_shift": {
+      "from_id": "ID_BEREAVED",
+      "to_id": "ID_CAREGIVER"
+    },
+    "ambivalence": [
+      ["GR_LOYALTY_PAST", "GR_OPENNESS_NEW"]
+    ],
+    "noise_turns": []
+  }
+}

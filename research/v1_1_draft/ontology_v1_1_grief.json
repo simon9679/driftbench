@@ -1,0 +1,37 @@
+{
+  "spec_version": "1.1.0-draft",
+  "title": "DriftBench v1.1 Draft Ontology — Grief & Loss domain",
+  "note": "Prototype for the grant deliverables. NOT part of the frozen v1 spec. Demonstrates how a new belief domain plugs into DriftBench.",
+  "concepts": {
+    "GR_GRIEF": {
+      "category": "emotion",
+      "canonical_label": "Active Grief",
+      "description": "Strength of present, active grief and sense of loss."
+    },
+    "GR_LOYALTY_PAST": {
+      "category": "values",
+      "canonical_label": "Loyalty to What Was Lost",
+      "description": "Felt obligation to the person/relationship that was lost; resistance to moving on."
+    },
+    "GR_OPENNESS_NEW": {
+      "category": "values",
+      "canonical_label": "Openness to a New Bond",
+      "description": "Willingness to form a new attachment and move forward."
+    },
+    "GR_GUILT": {
+      "category": "emotion",
+      "canonical_label": "Guilt About Moving On",
+      "description": "Guilt at the prospect of replacing or letting go of the lost bond."
+    },
+    "ID_BEREAVED": {
+      "category": "identity",
+      "canonical_label": "Bereaved Identity",
+      "description": "Self-view defined primarily by the loss."
+    },
+    "ID_CAREGIVER": {
+      "category": "identity",
+      "canonical_label": "Caregiver Identity",
+      "description": "Self-view as someone with love to give again."
+    }
+  }
+}
