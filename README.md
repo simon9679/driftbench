@@ -30,6 +30,10 @@ Output:
 
 That's it. You just validated your first submission.
 
+> _Example validator output on the minimal dummy submission — demonstrates the harness runs
+> end-to-end; **NOT** a system performance score. Real system scores require a real adapter
+> and vary by run._
+
 ## How it works
 
 ```
@@ -149,6 +153,15 @@ research/            Legacy and experimental material
 ## Specification
 
 Full contract details in [`standard/SPEC.md`](standard/SPEC.md).
+
+## Related work / Evaluation reliability
+
+This deterministic harness is one half of a broader focus on evaluation reliability. The
+other half studies LLM-as-judge reliability on ES-MemEval (WWW '26): a three-layer noise
+decomposition (judge / answerer / ingest), per-arm judge bias validated by blind human
+relabel (K=20), and the finding that subset-level capability claims are dominated by ingest
+stochasticity. DriftBench takes the deterministic route (no LLM judge); the ES-MemEval study
+calibrates the LLM-judge route. See [`eval_reliability/`](eval_reliability/).
 
 ## License
 
