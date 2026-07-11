@@ -161,7 +161,8 @@ other half studies LLM-as-judge reliability on ES-MemEval (WWW '26): a three-lay
 decomposition (judge / answerer / ingest), per-arm judge bias validated by blind human
 relabel (K=20), and the finding that subset-level capability claims are dominated by ingest
 stochasticity. DriftBench takes the deterministic route (no LLM judge); the ES-MemEval study
-calibrates the LLM-judge route. See [`eval_reliability/`](eval_reliability/).
+calibrates the LLM-judge route. See [`eval_reliability/`](eval_reliability/) — now covers five
+ingest-variance data points and two pre-registered negative product gates.
 
 **Belief-revision benchmarks.** Recent work (e.g. BeliefShift, and the broader belief-revision /
 contradiction line such as STALE and TOKI) targets the same real failure mode we care about —

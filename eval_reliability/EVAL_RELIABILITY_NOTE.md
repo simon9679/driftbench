@@ -34,7 +34,7 @@ judge artifact, and the raw leaderboard reorders once leniency is subtracted.
 ## Layer 2 — Answerer noise (small, symmetric)
 **Method:** re-answer ablation. Feed the **byte-identical** frozen v1.0 render strings to a
 fresh answerer + judge pass (temp = 0, but not byte-exact on this provider). Input held
-constant; only the answerer+judge stage re-rolled. Dumps: `_reans/`.
+constant; only the answerer+judge stage re-rolled. Dumps: re-answer ablation dumps.
 
 **Numbers (v1.0 input, original → re-answer):**
 
@@ -54,7 +54,7 @@ major noise source — a capability score does not swing meaningfully from re-an
 **Method:** controlled full re-ingest (16 conversations re-extracted, v1.1 config) **plus** a
 render-format ablation to prove the swing is the graph, not the presentation. The format
 ablation re-renders the *same* v1.1 graphs with the old threshold format (`TBG_RANK_RENDER=0`)
-and re-answers — isolating render format as a variable. Dumps: `_rankoff/`, `gate_graphs/`.
+and re-answers — isolating render format as a variable. Dumps: format-ablation dumps, per-conversation graph snapshots.
 
 **Numbers (v1.0 → re-ingest v1.1, and format toggled on the v1.1 graphs):**
 
@@ -116,3 +116,27 @@ pair of draws, **not** a measured variance band; establishing one requires **≥
 - **Scale-up:** K = 200 blind relabels (tighten per-arm bias from n≈6 to n≈40); ≥ 3 judge
   families; **≥ 5 ingests per system** to place an empirical variance band on every subset
   claim; report ingest-variance as a first-class benchmark metric, not a footnote.
+
+---
+
+## Additional measurements (July 2026)
+Compressed; full claim→number→method in [`MEASUREMENTS.md`](MEASUREMENTS.md).
+
+- **Significance does not survive re-ingestion.** A subset gap significant on one ingest
+  (long-horizon +0.60) is replaced, on a full re-ingest of the same system, by a *different*
+  significant subgroup (short +0.31, long now inconclusive). The significant subgroup flipped
+  long→short between two ingests.
+- **94.7% ingest symdiff at 33 sessions.** A fresh vs prior graph of one long conversation shares
+  ~5% of its labels (label-level; concept-level higher via paraphrase). A fifth ingest-variance
+  data point beyond the three-layer decomposition.
+- **Clock is not a noise source (closed).** Realistic inter-turn timing contributes ≈0
+  (max 0.0012); divergence appears only at multi-day gaps. Logical clock is exactly deterministic.
+- **Two pre-registered negative product gates.** (a) A computed state block added over retrieval
+  did not raise conflict detection (+0.10, threshold +0.30 → parity); the answerer cited the block
+  0/60 times — redundant with retrieved text. (b) A domain-naive blind reader could not confirm a
+  belief-dynamics ranking (top-5 match 2/5; 44% overall), though no-dynamics decoys correctly sank
+  to the bottom and a foreign corpus survived extraction 23/23.
+- **Benchmark-material note.** Evolving-state conversations are not guaranteed single-person
+  coherent (one case chained disparate topics/speakers across 32 sessions), which bounds the
+  validity of "did the person change?" for the benchmark class and any system measured on it.
+  A finding, offered respectfully to the benchmark authors.
