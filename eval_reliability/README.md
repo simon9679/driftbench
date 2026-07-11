@@ -12,3 +12,9 @@ numbers).
   (judge / answerer / ingest) with numbers and method for each.
 - [`prereg_reanswer.md`](prereg_reanswer.md) — pre-registration of the answerer-noise ablation.
 - [`prereg_rankoff.md`](prereg_rankoff.md) — pre-registration of the render-format ablation.
+
+## Related work
+Belief-revision benchmarks (BeliefShift, STALE, TOKI) define the *task* of detecting stale /
+contradicted memory. This work is complementary: a **reproducibility / measurement layer** —
+deterministic scoring (no LLM judge) plus *graded* rather than binary evidence, addressing the
+scoring-reliability gap those benchmarks flag but do not yet quantify.

@@ -163,6 +163,16 @@ relabel (K=20), and the finding that subset-level capability claims are dominate
 stochasticity. DriftBench takes the deterministic route (no LLM judge); the ES-MemEval study
 calibrates the LLM-judge route. See [`eval_reliability/`](eval_reliability/).
 
+**Belief-revision benchmarks.** Recent work (e.g. BeliefShift, and the broader belief-revision /
+contradiction line such as STALE and TOKI) targets the same real failure mode we care about —
+agents treating stale or contradicted memories as authoritative. Our focus is complementary
+along two axes we make measurable rather than assert: (1) **scoring substrate** — DriftBench
+scores deterministically (no LLM judge in the loop), which sidesteps the judge-reliability
+problem we quantify separately; (2) **evidence granularity** — we carry *graded* confidence
+per belief rather than binary held/dropped, so trajectories and partial contradictions are
+representable. We see these as different design points, not competitors: the belief-revision
+benchmarks define the task; our contribution is a reproducibility / measurement layer on top.
+
 ## License
 
 Apache 2.0 — see [LICENSE](LICENSE).
