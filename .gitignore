@@ -11,8 +11,19 @@ build/
 .ruff_cache/
 htmlcov/
 .coverage
+*.log
 submission.json
 .env
 venv/
 .venv/
 
+
+# Private TBG runners (engine driver) — NOT for publication; adapter stays public
+adapters/tbg/run_tbg_eval.py
+adapters/tbg/run_tbg_pack.py
+adapters/tbg/__pycache__/
+_cerebras.env
+_github.env
+_anthropic.env
+run_cerebras_pack.sh
+baselines/cerebras_pack/

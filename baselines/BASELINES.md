@@ -68,12 +68,20 @@ Dash (—) = metric not applicable to that scenario (null).
 
 ## Provenance & honesty note
 
-These results were produced through a **convenience runner**
-(`adapters/simple/driftbench_run.py` — its `build_prompt` / `parse_belief_state`),
-and the metric math is imported unchanged from the canonical `driftbench_core`.
+These results were produced by the orchestrator `run_baselines.py` (repo
+root), which injects the frozen ontology into each of the 7 official scenarios and
+scores them on the canonical `driftbench_core` metrics via the convenience runner's
+helpers (`adapters/simple/driftbench_run.py` — its `build_prompt` /
+`parse_belief_state`). The metric math is imported unchanged from `driftbench_core`.
 However, this is **NOT** the tamper-checked zero-trust validator: no nonce, no
 raw/conv hash chain, no integrity bans. Treat these as **baselines for orientation,
 not official certificates**.
+
+**Single-run caveat.** Each cell is one run at `temperature=0`. On hosted models
+(request batching, MoE routing, floating-point non-associativity) the output varies
+run-to-run even at `temperature=0`, so these numbers are **samples from a
+distribution, not fixed points**. For publication, run each model 3–5× and report
+mean ± spread rather than a single value.
 
 Low scores here are **expected headroom** for an early benchmark — they mark the
 gap a stronger system is meant to close, not a bug in the harness.

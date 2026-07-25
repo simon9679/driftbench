@@ -132,19 +132,31 @@ All scenarios in [`standard/v1/scenarios/`](standard/v1/scenarios/).
 Reproducible single-pass LLM baselines over all 7 scenarios live in
 [`baselines/BASELINES.md`](baselines/BASELINES.md). The profile
 **`BDA > ISS > CER > GCS > NRS`** holds across three independent non-reasoning
-models (GPT-4.1, Claude Haiku 4.5, gpt-oss-120b): today's LLMs track the
-*direction* of belief drift well, but recover conflict structure weakly and
-resist noise not at all — `NRS = 0.0` on all three.
+models (GPT-4.1, Claude Haiku 4.5, gpt-oss-120b) — with one close pair (`CER ≈ GCS`
+for Haiku, 0.259 vs 0.250) that run-to-run variance could reorder. The takeaway is
+stable: today's LLMs track the *direction* of belief drift well, but recover
+conflict structure weakly and resist noise not at all — `NRS = 0.0` on all three.
 
-Run your own:
+Reproduce the table (injects the frozen ontology into each official scenario, then
+scores it; needs an API key in the provider's `.env`, e.g. `_anthropic.env`):
+
+```bash
+python run_baselines.py --provider anthropic --model claude-haiku-4-5
+```
+
+For a quick harness demo — not a reproduction of the table above — the convenience
+runner scores a built-in scenario:
 
 ```bash
 python adapters/simple/driftbench_run.py --provider openai --model gpt-4o
 ```
 
-These baselines come from that **convenience runner** — the metric math is the
-canonical `driftbench_core`, but it is **not** the tamper-checked zero-trust
-validator (no nonce, no hash chain). Treat them as orientation, not certificates.
+Note its built-in scenarios use **free-form concept ids**, not the frozen v1
+ontology, so they exercise the scorer but do not match the official pack.
+
+Both paths use the canonical `driftbench_core` metrics, but neither is the
+tamper-checked zero-trust validator (no nonce, no hash chain) — treat these as
+orientation, not certificates.
 
 ## Roadmap
 
