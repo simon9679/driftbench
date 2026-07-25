@@ -11,9 +11,10 @@ into DriftBench. It implements only the format mapping — `BaseAdapter` →
 
 - **Included:** the adapter (the input/output contract — what fields a TBG
   trace must provide and how they map to DriftBench).
-- **Not included:** the TBG engine itself, and the runner scripts that drive it.
-  The engine is a separate system; the adapter does not depend on it at import
-  time.
+- **Not included:** the TBG engine itself, and the runner scripts that drive it
+  against the benchmark. The engine is a separate system; the adapter does not
+  depend on it at import time. The reference engine and those runners live in the
+  published TBG postmortem: <https://github.com/simon9679/tbg-postmortem>.
 
 ## Expected input
 
