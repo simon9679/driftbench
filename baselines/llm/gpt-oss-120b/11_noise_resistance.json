@@ -1,0 +1,160 @@
+{
+  "spec": "1.0.0",
+  "scenario_id": "11_noise_resistance",
+  "provider": "cerebras",
+  "model": "gpt-oss-120b",
+  "temperature": 0,
+  "run_utc": "2026-07-25T15:09:52.197014+00:00",
+  "scores": {
+    "CER": 0.0,
+    "GCS": null,
+    "BDA": 0.6666666666666666,
+    "ISS": 1.0,
+    "NRS": 0.0
+  },
+  "foreign_core_ids": [],
+  "state": {
+    "nodes": [
+      {
+        "id": "n1",
+        "label": "Founder Identity",
+        "core_id": "ID_FOUNDER",
+        "mapping_confidence": 0.92,
+        "confidence": 0.2,
+        "evidence_turn": 12,
+        "text_hash": "sha256:a9d26ea044638080e58f3a6f89fd23bcc169dde0685ecdf16a79695ff338e4de"
+      },
+      {
+        "id": "n2",
+        "label": "Employee Identity",
+        "core_id": "ID_EMPLOYEE",
+        "mapping_confidence": 0.93,
+        "confidence": 0.1,
+        "evidence_turn": 12,
+        "text_hash": "sha256:a9d26ea044638080e58f3a6f89fd23bcc169dde0685ecdf16a79695ff338e4de"
+      },
+      {
+        "id": "n3",
+        "label": "Financial Security",
+        "core_id": "V_FIN_SECURITY",
+        "mapping_confidence": 0.95,
+        "confidence": 0.7,
+        "evidence_turn": 12,
+        "text_hash": "sha256:a9d26ea044638080e58f3a6f89fd23bcc169dde0685ecdf16a79695ff338e4de"
+      },
+      {
+        "id": "n4",
+        "label": "Growth / Impact",
+        "core_id": "V_GROWTH",
+        "mapping_confidence": 0.94,
+        "confidence": 0.8,
+        "evidence_turn": 12,
+        "text_hash": "sha256:a9d26ea044638080e58f3a6f89fd23bcc169dde0685ecdf16a79695ff338e4de"
+      },
+      {
+        "id": "n5",
+        "label": "Fear of Failure",
+        "core_id": "F_FAILURE",
+        "mapping_confidence": 0.9,
+        "confidence": 0.2,
+        "evidence_turn": 12,
+        "text_hash": "sha256:a9d26ea044638080e58f3a6f89fd23bcc169dde0685ecdf16a79695ff338e4de"
+      },
+      {
+        "id": "n6",
+        "label": "Fear of Stagnation",
+        "core_id": "F_STAGNATION",
+        "mapping_confidence": 0.91,
+        "confidence": 0.3,
+        "evidence_turn": 12,
+        "text_hash": "sha256:a9d26ea044638080e58f3a6f89fd23bcc169dde0685ecdf16a79695ff338e4de"
+      },
+      {
+        "id": "n7",
+        "label": "MVP Launch Goal",
+        "core_id": "G_MVP_LAUNCH",
+        "mapping_confidence": 0.88,
+        "confidence": 0.1,
+        "evidence_turn": 12,
+        "text_hash": "sha256:a9d26ea044638080e58f3a6f89fd23bcc169dde0685ecdf16a79695ff338e4de"
+      },
+      {
+        "id": "n8",
+        "label": "Career Advancement Goal",
+        "core_id": "G_PROMOTION",
+        "mapping_confidence": 0.89,
+        "confidence": 0.1,
+        "evidence_turn": 12,
+        "text_hash": "sha256:a9d26ea044638080e58f3a6f89fd23bcc169dde0685ecdf16a79695ff338e4de"
+      }
+    ],
+    "edges": [
+      {
+        "source_id": "n1",
+        "target_id": "n2",
+        "source_core_id": "ID_FOUNDER",
+        "target_core_id": "ID_EMPLOYEE",
+        "relation": "contradicts",
+        "created_at_turn": 12,
+        "evidence_turn": 12,
+        "text_hash": "sha256:a9d26ea044638080e58f3a6f89fd23bcc169dde0685ecdf16a79695ff338e4de"
+      },
+      {
+        "source_id": "n3",
+        "target_id": "n8",
+        "source_core_id": "V_FIN_SECURITY",
+        "target_core_id": "G_PROMOTION",
+        "relation": "blocks",
+        "created_at_turn": 12,
+        "evidence_turn": 12,
+        "text_hash": "sha256:a9d26ea044638080e58f3a6f89fd23bcc169dde0685ecdf16a79695ff338e4de"
+      }
+    ],
+    "transitions": [
+      {
+        "node_id": "n2",
+        "core_id": "ID_EMPLOYEE",
+        "turn": 1,
+        "delta": -0.3,
+        "trigger_text_hash": "sha256:c2eef8395257d3908240c83992a5dfe503d474fb3ded2564ea639e77db913af9"
+      },
+      {
+        "node_id": "n4",
+        "core_id": "V_GROWTH",
+        "turn": 3,
+        "delta": 0.2,
+        "trigger_text_hash": "sha256:604719c5fe1c45975dd4a7e922e81ec0724dae3c2fcf6cee4d4aeaeae222af55"
+      },
+      {
+        "node_id": "n6",
+        "core_id": "F_STAGNATION",
+        "turn": 6,
+        "delta": -0.25,
+        "trigger_text_hash": "sha256:eb79ff290d93a23336c65d0cd1d9e1c54eeb6d27d6dcb8081a27cbb904581be8"
+      },
+      {
+        "node_id": "n3",
+        "core_id": "V_FIN_SECURITY",
+        "turn": 8,
+        "delta": 0.15,
+        "trigger_text_hash": "sha256:85ee5d76e16cfde19cef37b61270b30331510c2f4a041e5800c51738cdd6374a"
+      },
+      {
+        "node_id": "n5",
+        "core_id": "F_FAILURE",
+        "turn": 11,
+        "delta": -0.1,
+        "trigger_text_hash": "sha256:72133741ed537c23510b10c9334abea5154bcf5a845c523d14ea9d5729bc8533"
+      },
+      {
+        "node_id": "n1",
+        "core_id": "ID_FOUNDER",
+        "turn": 12,
+        "delta": 0.2,
+        "trigger_text_hash": "sha256:a9d26ea044638080e58f3a6f89fd23bcc169dde0685ecdf16a79695ff338e4de"
+      }
+    ]
+  },
+  "max_tokens": 20000,
+  "reasoning_effort": "low"
+}

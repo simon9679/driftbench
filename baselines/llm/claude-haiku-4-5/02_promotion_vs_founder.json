@@ -1,0 +1,230 @@
+{
+  "spec": "1.0.0",
+  "scenario_id": "02_promotion_vs_founder",
+  "provider": "anthropic",
+  "model": "claude-haiku-4-5",
+  "temperature": 0,
+  "max_tokens": 4000,
+  "reasoning_effort": null,
+  "run_utc": "2026-07-25T15:33:17.796281+00:00",
+  "scores": {
+    "CER": 0.2857142857142857,
+    "GCS": 0.0,
+    "BDA": 0.8571428571428571,
+    "ISS": 1.0,
+    "NRS": null
+  },
+  "note": null,
+  "foreign_core_ids": [],
+  "state": {
+    "nodes": [
+      {
+        "id": "n1",
+        "label": "Founder Identity",
+        "core_id": "ID_FOUNDER",
+        "mapping_confidence": 0.95,
+        "confidence": 0.88,
+        "evidence_turn": 12,
+        "text_hash": "sha256:c66f822313057c68cb996d60d5186ae08475d67b932b7b02457265466b9fe0a1"
+      },
+      {
+        "id": "n2",
+        "label": "Employee Identity",
+        "core_id": "ID_EMPLOYEE",
+        "mapping_confidence": 0.92,
+        "confidence": 0.15,
+        "evidence_turn": 11,
+        "text_hash": "sha256:b1f3520f31f5b2921e3db5cba6859437696a940b50b2164fb0df10549ad4aca9"
+      },
+      {
+        "id": "n3",
+        "label": "Financial Security",
+        "core_id": "V_FIN_SECURITY",
+        "mapping_confidence": 0.9,
+        "confidence": 0.45,
+        "evidence_turn": 12,
+        "text_hash": "sha256:c66f822313057c68cb996d60d5186ae08475d67b932b7b02457265466b9fe0a1"
+      },
+      {
+        "id": "n4",
+        "label": "Growth and Impact",
+        "core_id": "V_GROWTH",
+        "mapping_confidence": 0.93,
+        "confidence": 0.85,
+        "evidence_turn": 12,
+        "text_hash": "sha256:c66f822313057c68cb996d60d5186ae08475d67b932b7b02457265466b9fe0a1"
+      },
+      {
+        "id": "n5",
+        "label": "Fear of Failure",
+        "core_id": "F_FAILURE",
+        "mapping_confidence": 0.88,
+        "confidence": 0.25,
+        "evidence_turn": 9,
+        "text_hash": "sha256:f0d3e6319ceecbfb3d372c189771c162f42c2c2923f19cfed3e11058c71b0733"
+      },
+      {
+        "id": "n6",
+        "label": "Fear of Stagnation",
+        "core_id": "F_STAGNATION",
+        "mapping_confidence": 0.91,
+        "confidence": 0.82,
+        "evidence_turn": 9,
+        "text_hash": "sha256:f0d3e6319ceecbfb3d372c189771c162f42c2c2923f19cfed3e11058c71b0733"
+      },
+      {
+        "id": "n7",
+        "label": "MVP Launch Goal",
+        "core_id": "G_MVP_LAUNCH",
+        "mapping_confidence": 0.94,
+        "confidence": 0.92,
+        "evidence_turn": 10,
+        "text_hash": "sha256:3c7e0f98a11d6460b5401d086b2d81e6e5bf23cbd8108e374536f005043357ee"
+      },
+      {
+        "id": "n8",
+        "label": "Promotion Goal",
+        "core_id": "G_PROMOTION",
+        "mapping_confidence": 0.93,
+        "confidence": 0.05,
+        "evidence_turn": 11,
+        "text_hash": "sha256:b1f3520f31f5b2921e3db5cba6859437696a940b50b2164fb0df10549ad4aca9"
+      }
+    ],
+    "edges": [
+      {
+        "source_id": "n1",
+        "target_id": "n2",
+        "source_core_id": "ID_FOUNDER",
+        "target_core_id": "ID_EMPLOYEE",
+        "relation": "contradicts",
+        "created_at_turn": 3,
+        "evidence_turn": 3,
+        "text_hash": "sha256:3a67d50444d69ebf4f303f4317055205c2ad2e3d012713780e544eed90233d01"
+      },
+      {
+        "source_id": "n4",
+        "target_id": "n3",
+        "source_core_id": "V_GROWTH",
+        "target_core_id": "V_FIN_SECURITY",
+        "relation": "contradicts",
+        "created_at_turn": 4,
+        "evidence_turn": 4,
+        "text_hash": "sha256:0d8fcddf78348beedd0e0f749fd16f296ec7a97746b999f5588a2c2760b3a5b4"
+      },
+      {
+        "source_id": "n8",
+        "target_id": "n7",
+        "source_core_id": "G_PROMOTION",
+        "target_core_id": "G_MVP_LAUNCH",
+        "relation": "blocks",
+        "created_at_turn": 4,
+        "evidence_turn": 4,
+        "text_hash": "sha256:0d8fcddf78348beedd0e0f749fd16f296ec7a97746b999f5588a2c2760b3a5b4"
+      },
+      {
+        "source_id": "n6",
+        "target_id": "n5",
+        "source_core_id": "F_STAGNATION",
+        "target_core_id": "F_FAILURE",
+        "relation": "dominates",
+        "created_at_turn": 9,
+        "evidence_turn": 9,
+        "text_hash": "sha256:f0d3e6319ceecbfb3d372c189771c162f42c2c2923f19cfed3e11058c71b0733"
+      }
+    ],
+    "transitions": [
+      {
+        "node_id": "n1",
+        "core_id": "ID_FOUNDER",
+        "turn": 2,
+        "delta": 0.15,
+        "trigger_text_hash": "sha256:c19fd0ca49c306947250c1ffc82949e9fc258442f36fed95b99540aca6e8ffaa"
+      },
+      {
+        "node_id": "n6",
+        "core_id": "F_STAGNATION",
+        "turn": 2,
+        "delta": 0.2,
+        "trigger_text_hash": "sha256:c19fd0ca49c306947250c1ffc82949e9fc258442f36fed95b99540aca6e8ffaa"
+      },
+      {
+        "node_id": "n3",
+        "core_id": "V_FIN_SECURITY",
+        "turn": 3,
+        "delta": 0.15,
+        "trigger_text_hash": "sha256:3a67d50444d69ebf4f303f4317055205c2ad2e3d012713780e544eed90233d01"
+      },
+      {
+        "node_id": "n7",
+        "core_id": "G_MVP_LAUNCH",
+        "turn": 5,
+        "delta": 0.25,
+        "trigger_text_hash": "sha256:49f3d12b3719b385f8932962c9e7321d2ca06ee12682f721fcf76b7501c5b4f1"
+      },
+      {
+        "node_id": "n5",
+        "core_id": "F_FAILURE",
+        "turn": 6,
+        "delta": -0.15,
+        "trigger_text_hash": "sha256:413517782e5e2959d39c9a069ae9778842d27073b3c48febc965130615bbc5cd"
+      },
+      {
+        "node_id": "n8",
+        "core_id": "G_PROMOTION",
+        "turn": 7,
+        "delta": 0.2,
+        "trigger_text_hash": "sha256:9e190512bd5976b20a97f75c9c994960c4041b5bca16902bb5ae18dd958b51ee"
+      },
+      {
+        "node_id": "n1",
+        "core_id": "ID_FOUNDER",
+        "turn": 9,
+        "delta": 0.25,
+        "trigger_text_hash": "sha256:f0d3e6319ceecbfb3d372c189771c162f42c2c2923f19cfed3e11058c71b0733"
+      },
+      {
+        "node_id": "n6",
+        "core_id": "F_STAGNATION",
+        "turn": 9,
+        "delta": 0.15,
+        "trigger_text_hash": "sha256:f0d3e6319ceecbfb3d372c189771c162f42c2c2923f19cfed3e11058c71b0733"
+      },
+      {
+        "node_id": "n7",
+        "core_id": "G_MVP_LAUNCH",
+        "turn": 10,
+        "delta": 0.2,
+        "trigger_text_hash": "sha256:3c7e0f98a11d6460b5401d086b2d81e6e5bf23cbd8108e374536f005043357ee"
+      },
+      {
+        "node_id": "n8",
+        "core_id": "G_PROMOTION",
+        "turn": 11,
+        "delta": -0.35,
+        "trigger_text_hash": "sha256:b1f3520f31f5b2921e3db5cba6859437696a940b50b2164fb0df10549ad4aca9"
+      },
+      {
+        "node_id": "n2",
+        "core_id": "ID_EMPLOYEE",
+        "turn": 11,
+        "delta": -0.3,
+        "trigger_text_hash": "sha256:b1f3520f31f5b2921e3db5cba6859437696a940b50b2164fb0df10549ad4aca9"
+      },
+      {
+        "node_id": "n1",
+        "core_id": "ID_FOUNDER",
+        "turn": 12,
+        "delta": 0.15,
+        "trigger_text_hash": "sha256:c66f822313057c68cb996d60d5186ae08475d67b932b7b02457265466b9fe0a1"
+      },
+      {
+        "node_id": "n4",
+        "core_id": "V_GROWTH",
+        "turn": 12,
+        "delta": 0.1,
+        "trigger_text_hash": "sha256:c66f822313057c68cb996d60d5186ae08475d67b932b7b02457265466b9fe0a1"
+      }
+    ]
+  }
+}

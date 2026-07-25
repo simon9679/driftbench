@@ -1,0 +1,24 @@
+{
+  "spec": "1.0.0",
+  "scenario_id": "04_failure_recovery_to_launch",
+  "provider": "cerebras",
+  "model": "zai-glm-4.7",
+  "temperature": 0,
+  "run_utc": "2026-07-25T15:15:58.178686+00:00",
+  "scores": {
+    "CER": 0.0,
+    "GCS": null,
+    "BDA": 0.0,
+    "ISS": 0.0,
+    "NRS": null
+  },
+  "note": "call_error: empty content (finish_reason=length, reasoning_tokens=6354)",
+  "foreign_core_ids": [],
+  "state": {
+    "nodes": [],
+    "edges": [],
+    "transitions": []
+  },
+  "max_tokens": 20000,
+  "reasoning_effort": "low"
+}

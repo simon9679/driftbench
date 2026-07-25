@@ -1,0 +1,23 @@
+{
+  "spec": "1.0.0",
+  "scenario_id": "11_noise_resistance",
+  "provider": "cerebras",
+  "model": "zai-glm-4.7",
+  "temperature": 0,
+  "run_utc": "2026-07-25T15:12:26.147296+00:00",
+  "scores": {
+    "CER": 0.0,
+    "GCS": null,
+    "BDA": 0.0,
+    "ISS": 0.0,
+    "NRS": 1.0
+  },
+  "foreign_core_ids": [],
+  "state": {
+    "nodes": [],
+    "edges": [],
+    "transitions": []
+  },
+  "max_tokens": 20000,
+  "reasoning_effort": "low"
+}

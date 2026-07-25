@@ -1,0 +1,195 @@
+{
+  "spec": "1.0.0",
+  "scenario_id": "10_delayed_contradiction",
+  "provider": "github",
+  "model": "openai/gpt-4.1",
+  "temperature": 0,
+  "max_tokens": 4000,
+  "reasoning_effort": null,
+  "run_utc": "2026-07-25T15:45:17.076575+00:00",
+  "scores": {
+    "CER": 0.3333333333333333,
+    "GCS": 0.5,
+    "BDA": 0.0,
+    "ISS": 0.0,
+    "NRS": null
+  },
+  "note": null,
+  "foreign_core_ids": [],
+  "state": {
+    "nodes": [
+      {
+        "id": "n1",
+        "label": "Entrepreneurial / Founder Identity — Self-view as an autonomous creator and business owner.",
+        "core_id": "ID_FOUNDER",
+        "mapping_confidence": 0.99,
+        "confidence": 0.95,
+        "evidence_turn": 14,
+        "text_hash": "sha256:5926c3280aa15665c86961b0063082b35ecda4460c9a58b3f32071c6a46fa7bc"
+      },
+      {
+        "id": "n2",
+        "label": "Corporate / Employee Identity — Self-view as a structured team member prioritizing stability.",
+        "core_id": "ID_EMPLOYEE",
+        "mapping_confidence": 0.9,
+        "confidence": 0.15,
+        "evidence_turn": 7,
+        "text_hash": "sha256:678e4a574a600a32cf5f28b2f9afaac8491646ce5bdd92c0683dee8d0085107e"
+      },
+      {
+        "id": "n3",
+        "label": "Financial Security — Prioritization of predictable income and avoidance of financial ruin.",
+        "core_id": "V_FIN_SECURITY",
+        "mapping_confidence": 0.8,
+        "confidence": 0.2,
+        "evidence_turn": 8,
+        "text_hash": "sha256:c1c5827c242308d11deb7f64cd7037933eeb60fab19d389328e68611f4afdd65"
+      },
+      {
+        "id": "n4",
+        "label": "Growth / Impact — Prioritization of learning, scaling, and market impact over comfort.",
+        "core_id": "V_GROWTH",
+        "mapping_confidence": 0.95,
+        "confidence": 0.95,
+        "evidence_turn": 14,
+        "text_hash": "sha256:5926c3280aa15665c86961b0063082b35ecda4460c9a58b3f32071c6a46fa7bc"
+      },
+      {
+        "id": "n5",
+        "label": "Fear of Failure — Anxiety about public embarrassment or losing capital.",
+        "core_id": "F_FAILURE",
+        "mapping_confidence": 0.85,
+        "confidence": 0.7,
+        "evidence_turn": 9,
+        "text_hash": "sha256:5b28a1b9eb2d21b98019da269366a7d19ef74c0d1e16cef75305134c1c4a8024"
+      },
+      {
+        "id": "n6",
+        "label": "Fear of Stagnation — Anxiety about being trapped in a repetitive, unfulfilling role.",
+        "core_id": "F_STAGNATION",
+        "mapping_confidence": 0.8,
+        "confidence": 0.6,
+        "evidence_turn": 3,
+        "text_hash": "sha256:e42f90918176a24662ad58496d2b35b9d135bce17dda0c70c286bc003a5c4e18"
+      },
+      {
+        "id": "n7",
+        "label": "MVP Launch Goal — Concrete objective to release a minimum viable product.",
+        "core_id": "G_MVP_LAUNCH",
+        "mapping_confidence": 0.8,
+        "confidence": 0.7,
+        "evidence_turn": 5,
+        "text_hash": "sha256:3f37201e52cfae7c59dd2a4f5f69904babf8ce8062606f22cc3e683ff4926a9b"
+      },
+      {
+        "id": "n8",
+        "label": "Career Advancement Goal — Concrete objective to achieve higher corporate status.",
+        "core_id": "G_PROMOTION",
+        "mapping_confidence": 0.7,
+        "confidence": 0.05,
+        "evidence_turn": 2,
+        "text_hash": "sha256:543c6142f02ffa9a67a8e9043559e659548d0621790417853fbe286e667cbce2"
+      }
+    ],
+    "edges": [
+      {
+        "source_id": "n1",
+        "target_id": "n2",
+        "source_core_id": "ID_FOUNDER",
+        "target_core_id": "ID_EMPLOYEE",
+        "relation": "contradicts",
+        "created_at_turn": 3,
+        "evidence_turn": 3,
+        "text_hash": "sha256:e42f90918176a24662ad58496d2b35b9d135bce17dda0c70c286bc003a5c4e18"
+      },
+      {
+        "source_id": "n1",
+        "target_id": "n3",
+        "source_core_id": "ID_FOUNDER",
+        "target_core_id": "V_FIN_SECURITY",
+        "relation": "contradicts",
+        "created_at_turn": 8,
+        "evidence_turn": 8,
+        "text_hash": "sha256:c1c5827c242308d11deb7f64cd7037933eeb60fab19d389328e68611f4afdd65"
+      },
+      {
+        "source_id": "n1",
+        "target_id": "n4",
+        "source_core_id": "ID_FOUNDER",
+        "target_core_id": "V_GROWTH",
+        "relation": "supports",
+        "created_at_turn": 13,
+        "evidence_turn": 13,
+        "text_hash": "sha256:f9d527de1f1dd3c038859ac1b99a5fc694fdbfd55b066d92c66e801727d5f5e6"
+      },
+      {
+        "source_id": "n5",
+        "target_id": "n6",
+        "source_core_id": "F_FAILURE",
+        "target_core_id": "F_STAGNATION",
+        "relation": "blocks",
+        "created_at_turn": 3,
+        "evidence_turn": 3,
+        "text_hash": "sha256:e42f90918176a24662ad58496d2b35b9d135bce17dda0c70c286bc003a5c4e18"
+      }
+    ],
+    "transitions": [
+      {
+        "node_id": "n1",
+        "core_id": "ID_FOUNDER",
+        "turn": 11,
+        "delta": -0.2,
+        "trigger_text_hash": "sha256:947b816ed0e40d8da36d9e8eee0eea7c0342347f41951659ecf261640e51f83b"
+      },
+      {
+        "node_id": "n1",
+        "core_id": "ID_FOUNDER",
+        "turn": 12,
+        "delta": 0.15,
+        "trigger_text_hash": "sha256:781dacc894dc06df0bc24b19e283640ed07e6a1f923ae18f64c3c64345b52a74"
+      },
+      {
+        "node_id": "n2",
+        "core_id": "ID_EMPLOYEE",
+        "turn": 7,
+        "delta": -0.2,
+        "trigger_text_hash": "sha256:678e4a574a600a32cf5f28b2f9afaac8491646ce5bdd92c0683dee8d0085107e"
+      },
+      {
+        "node_id": "n3",
+        "core_id": "V_FIN_SECURITY",
+        "turn": 8,
+        "delta": -0.2,
+        "trigger_text_hash": "sha256:c1c5827c242308d11deb7f64cd7037933eeb60fab19d389328e68611f4afdd65"
+      },
+      {
+        "node_id": "n4",
+        "core_id": "V_GROWTH",
+        "turn": 13,
+        "delta": 0.2,
+        "trigger_text_hash": "sha256:f9d527de1f1dd3c038859ac1b99a5fc694fdbfd55b066d92c66e801727d5f5e6"
+      },
+      {
+        "node_id": "n5",
+        "core_id": "F_FAILURE",
+        "turn": 10,
+        "delta": 0.2,
+        "trigger_text_hash": "sha256:5dad45420c0b151d789856ee94ff34bc30e854ae366a171acf374bfe61ca217e"
+      },
+      {
+        "node_id": "n6",
+        "core_id": "F_STAGNATION",
+        "turn": 3,
+        "delta": 0.2,
+        "trigger_text_hash": "sha256:e42f90918176a24662ad58496d2b35b9d135bce17dda0c70c286bc003a5c4e18"
+      },
+      {
+        "node_id": "n7",
+        "core_id": "G_MVP_LAUNCH",
+        "turn": 5,
+        "delta": 0.2,
+        "trigger_text_hash": "sha256:3f37201e52cfae7c59dd2a4f5f69904babf8ce8062606f22cc3e683ff4926a9b"
+      }
+    ]
+  }
+}
