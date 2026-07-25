@@ -9,7 +9,7 @@ description = "Deterministic benchmark core for belief drift and identity tracki
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "Apache-2.0" }
-authors = [{ name = "DriftBench" }]
+authors = [{ name = "Oleksii Simon" }]
 dependencies = []
 
 [project.optional-dependencies]

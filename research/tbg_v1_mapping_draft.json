@@ -1,0 +1,62 @@
+{
+  "spec_version": "1.0.0-drift-test",
+  "title": "DriftBench v2 Drift Test Ontology — actual TBG concept_ids",
+  "concepts": {
+    "identity:disciplined_person": {
+      "category": "identity",
+      "canonical_label": "disciplined person"
+    },
+    "identity:finishes_what_started": {
+      "category": "identity",
+      "canonical_label": "finishes what started"
+    },
+    "identity:procrastinates_and_delay": {
+      "category": "identity",
+      "canonical_label": "procrastinates and delays"
+    },
+    "identity:ignores_others_opinions": {
+      "category": "identity",
+      "canonical_label": "ignores others opinions"
+    },
+    "career:stable_career": {
+      "category": "career",
+      "canonical_label": "stable career"
+    },
+    "career:wants_to_quit_everything": {
+      "category": "career",
+      "canonical_label": "wants to quit everything"
+    },
+    "career:job_is_meaningless": {
+      "category": "career",
+      "canonical_label": "job is meaningless"
+    },
+    "goals:start_a_youtube_channel": {
+      "category": "goals",
+      "canonical_label": "start a YouTube channel"
+    },
+    "values:desires_freedom": {
+      "category": "values",
+      "canonical_label": "desires freedom"
+    },
+    "mood:proud_of_career": {
+      "category": "mood",
+      "canonical_label": "proud of career"
+    },
+    "mood:dreads_mondays": {
+      "category": "mood",
+      "canonical_label": "dreads mondays"
+    },
+    "mood:feels_exhausted": {
+      "category": "mood",
+      "canonical_label": "feels exhausted"
+    },
+    "mood:feels_trapped": {
+      "category": "mood",
+      "canonical_label": "feels trapped"
+    },
+    "fears:fears_regret": {
+      "category": "fears",
+      "canonical_label": "fears regret"
+    }
+  }
+}

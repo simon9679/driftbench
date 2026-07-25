@@ -10,9 +10,11 @@ The fastest way to contribute is to run your cognitive AI system through the ben
 
 ```bash
 pip install -e .
-# Run the universal runner against your LLM:
-python adapters/simple/driftbench_run.py --provider openai --model gpt-4o
-# Or validate a custom submission:
+# Score an LLM over the 7 official scenarios (injects the frozen ontology so
+# emitted core_ids match v1). Needs an API key in the provider's .env,
+# e.g. _anthropic.env — see run_baselines.py for the supported providers.
+python run_baselines.py --provider anthropic --model claude-haiku-4-5
+# Or validate a custom submission produced by your own adapter:
 driftbench-validate --sub your_submission.json --scen standard/v1/scenarios/01_burnout_to_founder.json --nonce YOUR_NONCE
 ```
 

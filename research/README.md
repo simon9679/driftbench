@@ -8,6 +8,10 @@ for the authoritative ontology and scenarios.
 
 - [`migration_matrix.md`](migration_matrix.md) — mapping from free-text research
   concepts to the canonical `core_id` values used by DriftBench Standard v1.
+- [`tbg_v1_mapping_draft.json`](tbg_v1_mapping_draft.json) — a draft drift-test
+  ontology using the TBG engine's actual `concept_id` namespace (e.g.
+  `identity:disciplined_person`), kept as raw material for a future v1.1 mapping.
+  Non-normative; not part of the frozen v1 ontology.
 
 ## In progress
 
