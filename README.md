@@ -127,6 +127,25 @@ The ontology is frozen for v1. See [`standard/v1/ontology.json`](standard/v1/ont
 
 All scenarios in [`standard/v1/scenarios/`](standard/v1/scenarios/).
 
+## Baselines
+
+Reproducible single-pass LLM baselines over all 7 scenarios live in
+[`baselines/BASELINES.md`](baselines/BASELINES.md). The profile
+**`BDA > ISS > CER > GCS > NRS`** holds across three independent non-reasoning
+models (GPT-4.1, Claude Haiku 4.5, gpt-oss-120b): today's LLMs track the
+*direction* of belief drift well, but recover conflict structure weakly and
+resist noise not at all — `NRS = 0.0` on all three.
+
+Run your own:
+
+```bash
+python adapters/simple/driftbench_run.py --provider openai --model gpt-4o
+```
+
+These baselines come from that **convenience runner** — the metric math is the
+canonical `driftbench_core`, but it is **not** the tamper-checked zero-trust
+validator (no nonce, no hash chain). Treat them as orientation, not certificates.
+
 ## Roadmap
 
 v1 is frozen for reproducibility; all future work is additive. Next up:
