@@ -38,6 +38,8 @@ Dash (—) = metric not applicable to that scenario (null).
 
 **Provider:** github  ·  **Model:** `openai/gpt-4.1`  ·  **Temp:** 0  ·  **max_tokens:** 4000  ·  **reasoning_effort:** n/a  ·  **Run:** 2026-07-25 15:46 UTC
 
+> 🕰 **Historical — not reproducible.** These numbers were measured via GitHub Models, which GitHub shut down on **2026-07-30** (playground, model catalog, inference API and BYOK endpoints — for everyone, including existing users). The table is kept as a record of the measurement; the endpoint no longer exists, so it cannot be re-run.
+
 | Scenario | CER | GCS | BDA | ISS | NRS |
 |----------|-----|-----|-----|-----|-----|
 | 01_burnout_to_founder | 0.2222 | 0.2500 | 1.0000 | 1.0000 | — |
@@ -68,24 +70,90 @@ Dash (—) = metric not applicable to that scenario (null).
 
 ## Provenance & honesty note
 
-These results were produced by the orchestrator `run_baselines.py` (repo
-root), which injects the frozen ontology into each of the 7 official scenarios and
-scores them on the canonical `driftbench_core` metrics via the convenience runner's
-helpers (`adapters/simple/driftbench_run.py` — its `build_prompt` /
-`parse_belief_state`). The metric math is imported unchanged from `driftbench_core`.
+These results were produced through a **convenience runner**
+(`adapters/simple/driftbench_run.py` — its `build_prompt` / `parse_belief_state`),
+and the metric math is imported unchanged from the canonical `driftbench_core`.
 However, this is **NOT** the tamper-checked zero-trust validator: no nonce, no
 raw/conv hash chain, no integrity bans. Treat these as **baselines for orientation,
 not official certificates**.
 
-**Single-run caveat.** Each cell is one run at `temperature=0`. On hosted models
-(request batching, MoE routing, floating-point non-associativity) the output varies
-run-to-run even at `temperature=0`, so these numbers are **samples from a
-distribution, not fixed points**. For publication, run each model 3–5× and report
-mean ± spread rather than a single value.
-
 Low scores here are **expected headroom** for an early benchmark — they mark the
 gap a stronger system is meant to close, not a bug in the harness.
 
-Reasoning models (e.g. `zai-glm-4.7`) spend their token budget on hidden reasoning
-and truncate / malform the JSON — hence the coverage caveats. Non-reasoning
-instruct models emit valid JSON reliably and are the fair comparison points.
+Reasoning models spend their token budget on hidden reasoning and truncate /
+malform the JSON — hence the coverage caveats. Non-reasoning instruct models emit
+valid JSON reliably and are the fair comparison points.
+
+## Repeated-run variance (same model, same scenarios)
+
+3 runs of one model on the same seven scenarios, `temperature=0`, **nothing changed between runs**. The spread below is what the same configuration produced on repeat. The range sits next to each number on purpose — a single run is not a measurement.
+
+### `gpt-oss-120b` — 3 runs, same model, nothing changed between runs
+
+**CER**
+
+| Scenario | run1 | run2 | run3 | mean (min–max, Δrange) |
+|---|---|---|---|---|
+| 01_burnout_to_founder | 0.2500 | 0.2500 | 0.3333 | 0.2778 (0.25–0.33, Δ0.08) |
+| 02_promotion_vs_founder | 0.2500 | 0.2500 | 0.2500 | 0.2500 (0.25–0.25, Δ0.00) |
+| 03_financial_identity | 0.3333 | 0.3333 | 0.3333 | 0.3333 (0.33–0.33, Δ0.00) |
+| 04_failure_recovery_to_launch | 0.2500 | 0.5000 | 0.2500 | 0.3333 (0.25–0.50, Δ0.25) |
+| 05_promotion_after_launch | 0.2857 | 0.2857 | 0.2857 | 0.2857 (0.29–0.29, Δ0.00) |
+| 10_delayed_contradiction | 0.3333 | 0.4000 | 0.4000 | 0.3778 (0.33–0.40, Δ0.07) |
+| 11_noise_resistance | 0.0000 | 0.0000 | 0.0000 | 0.0000 (0.00–0.00, Δ0.00) |
+| **benchmark mean** | 0.2432 | 0.2884 | 0.2646 | 0.2654 (0.24–0.29, Δ0.05) |
+
+**GCS**
+
+| Scenario | run1 | run2 | run3 | mean (min–max, Δrange) |
+|---|---|---|---|---|
+| 01_burnout_to_founder | 0.0000 | 0.0000 | — | 0.0000 (0.00–0.00, Δ0.00) |
+| 02_promotion_vs_founder | 1.0000 | 0.5000 | 0.5000 | 0.6667 (0.50–1.00, Δ0.50) |
+| 03_financial_identity | 0.0000 | — | 0.0000 | 0.0000 (0.00–0.00, Δ0.00) |
+| 04_failure_recovery_to_launch | 0.5000 | 0.2500 | 0.5000 | 0.4167 (0.25–0.50, Δ0.25) |
+| 05_promotion_after_launch | 0.3333 | 0.3333 | 0.3333 | 0.3333 (0.33–0.33, Δ0.00) |
+| 10_delayed_contradiction | 0.5000 | 0.0000 | 0.0000 | 0.1667 (0.00–0.50, Δ0.50) |
+| 11_noise_resistance | — | — | — | — |
+| **benchmark mean** | 0.3889 | 0.2167 | 0.2667 | 0.2907 (0.22–0.39, Δ0.17) |
+
+**BDA**
+
+| Scenario | run1 | run2 | run3 | mean (min–max, Δrange) |
+|---|---|---|---|---|
+| 01_burnout_to_founder | 0.8333 | 0.8333 | 1.0000 | 0.8889 (0.83–1.00, Δ0.17) |
+| 02_promotion_vs_founder | 0.8571 | 0.8571 | 0.8571 | 0.8571 (0.86–0.86, Δ0.00) |
+| 03_financial_identity | 0.2500 | 0.2500 | 0.2500 | 0.2500 (0.25–0.25, Δ0.00) |
+| 04_failure_recovery_to_launch | 0.8333 | 0.8333 | 0.8333 | 0.8333 (0.83–0.83, Δ0.00) |
+| 05_promotion_after_launch | 0.5714 | 0.5714 | 0.5714 | 0.5714 (0.57–0.57, Δ0.00) |
+| 10_delayed_contradiction | 0.5000 | 0.2500 | 0.2500 | 0.3333 (0.25–0.50, Δ0.25) |
+| 11_noise_resistance | 0.3333 | 0.0000 | 0.0000 | 0.1111 (0.00–0.33, Δ0.33) |
+| **benchmark mean** | 0.5969 | 0.5136 | 0.5374 | 0.5493 (0.51–0.60, Δ0.08) |
+
+**ISS**
+
+| Scenario | run1 | run2 | run3 | mean (min–max, Δrange) |
+|---|---|---|---|---|
+| 01_burnout_to_founder | 1.0000 | 1.0000 | 0.8000 | 0.9333 (0.80–1.00, Δ0.20) |
+| 02_promotion_vs_founder | 0.8000 | 0.7200 | 0.7200 | 0.7467 (0.72–0.80, Δ0.08) |
+| 03_financial_identity | 0.0000 | 0.0000 | 0.0000 | 0.0000 (0.00–0.00, Δ0.00) |
+| 04_failure_recovery_to_launch | 0.5200 | 0.6000 | 0.5200 | 0.5467 (0.52–0.60, Δ0.08) |
+| 05_promotion_after_launch | 0.8000 | 0.8000 | 0.8000 | 0.8000 (0.80–0.80, Δ0.00) |
+| 10_delayed_contradiction | 0.0000 | 0.0000 | 0.0000 | 0.0000 (0.00–0.00, Δ0.00) |
+| 11_noise_resistance | 0.0000 | 0.0000 | 0.0000 | 0.0000 (0.00–0.00, Δ0.00) |
+| **benchmark mean** | 0.4457 | 0.4457 | 0.4057 | 0.4324 (0.41–0.45, Δ0.04) |
+
+**NRS**
+
+| Scenario | run1 | run2 | run3 | mean (min–max, Δrange) |
+|---|---|---|---|---|
+| 01_burnout_to_founder | — | — | — | — |
+| 02_promotion_vs_founder | — | — | — | — |
+| 03_financial_identity | — | — | — | — |
+| 04_failure_recovery_to_launch | — | — | — | — |
+| 05_promotion_after_launch | — | — | — | — |
+| 10_delayed_contradiction | — | — | — | — |
+| 11_noise_resistance | 0.0000 | 1.0000 | 1.0000 | 0.6667 (0.00–1.00, Δ1.00) |
+| **benchmark mean** | 0.0000 | 1.0000 | 1.0000 | 0.6667 (0.00–1.00, Δ1.00) |
+
+
+**What to take from this.** Numbers that read as clean in a one-shot table move on repeat — some cells not at all, others by a large margin (the Δrange column). The widest single (scenario, metric) swing here was **Δ1.00**. A single run of a single model on a single scenario is not a measurement; do not rank systems on one run. And 3 runs of one model on seven scenarios is itself a small sample — it says nothing beyond this exact configuration, and a small spread here is not proof of reliability.

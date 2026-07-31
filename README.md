@@ -137,6 +137,11 @@ for Haiku, 0.259 vs 0.250) that run-to-run variance could reorder. The takeaway 
 stable: today's LLMs track the *direction* of belief drift well, but recover
 conflict structure weakly and resist noise not at all — `NRS = 0.0` on all three.
 
+Repeated runs of the same model on the same scenarios are now published **with their
+spread** in [`baselines/BASELINES.md`](baselines/BASELINES.md): some per-scenario
+cells barely move between runs, others swing widely, so a single pass is a sample,
+not a measurement — systems must not be ranked on one run.
+
 Reproduce the table (injects the frozen ontology into each official scenario, then
 scores it; needs an API key in the provider's `.env`, e.g. `_anthropic.env`):
 

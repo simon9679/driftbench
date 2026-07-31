@@ -14,9 +14,9 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
   per-scenario JSON in `baselines/llm/` for GPT-4.1, Claude Haiku 4.5, gpt-oss-120b,
   and zai-glm-4.7. Scored with the canonical `driftbench_core` metrics (not the
   zero-trust validator); coverage-honest (parse failures excluded from means).
-- **`run_baselines.py`** — multi-provider orchestrator (Cerebras / GitHub Models /
-  Anthropic) that injects the frozen ontology into each official scenario before
-  scoring, so emitted `core_id`s match v1.
+- **`run_baselines.py`** — multi-provider orchestrator (Cerebras / Anthropic) that
+  injects the frozen ontology into each official scenario before scoring, so emitted
+  `core_id`s match v1.
 
 ---
 
