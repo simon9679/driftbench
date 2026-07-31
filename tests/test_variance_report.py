@@ -1,5 +1,6 @@
 """Offline tests for the baseline variance report: range math, undefined (—) and
 parse-failure (fail) handling."""
+import json
 import sys
 from pathlib import Path
 
@@ -8,6 +9,7 @@ from baselines.variance_report import (  # noqa: E402
     summarize,
     per_run_benchmark_means,
     build_markdown,
+    load_runs,
     FAIL,
 )
 
@@ -85,6 +87,48 @@ def test_benchmark_means_skip_failed_and_undefined():
     assert abs(means[0] - 0.5) < 1e-9      # (0.2 + 0.8) / 2
     assert abs(means[1] - 0.4) < 1e-9      # s2 failed → only s1
     assert abs(means[2] - 0.6) < 1e-9      # s2 undefined → only s1
+
+
+# ─── parse-failure DETECTION (load_runs) ─────────────────────────────────────
+# Covers the classification step itself — a real record shape with a `parse_error`
+# note must become FAIL, a clean record must become a value. Guards against the
+# exact regression we just fixed (fail cells counted as real numbers).
+
+def _write(path, rec):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(rec), encoding="utf-8")
+
+
+def test_load_runs_classifies_parse_error_and_clean_records(tmp_path):
+    model = tmp_path / "demo"
+    # run1: the real shape of a parse failure — note has parse_error, empty state,
+    # and the artifact NRS=1.0 that must NOT be treated as a real score.
+    _write(model / "run1" / "11_x.json", {
+        "scenario_id": "11_x",
+        "scores": {"CER": 0.0, "GCS": None, "BDA": 0.0, "ISS": 0.0, "NRS": 1.0},
+        "note": "parse_error: Expecting ',' delimiter: line 11 column 5",
+        "state": {"nodes": [], "edges": [], "transitions": []},
+    })
+    # run2: a clean answer — no `note`, real values, non-empty state.
+    _write(model / "run2" / "11_x.json", {
+        "scenario_id": "11_x",
+        "scores": {"CER": 0.5, "GCS": None, "BDA": 0.8, "ISS": 0.4, "NRS": 0.0},
+        "state": {"nodes": [{"id": "n1"}], "edges": [], "transitions": []},
+    })
+
+    cells = load_runs(tmp_path)["demo"]["scenarios"]["11_x"]
+
+    # Parse-failed run → FAIL on every metric (its 1.0 must not survive as a value).
+    assert cells["NRS"][0] == FAIL
+    assert cells["BDA"][0] == FAIL
+    # Clean run → its real values.
+    assert cells["NRS"][1] == 0.0
+    assert cells["BDA"][1] == 0.8
+
+    # And the failure is excluded from the summary, leaving one good run.
+    st = summarize(cells["NRS"])
+    assert st["n_fail"] == 1
+    assert st["n_ok"] == 1
 
 
 def test_build_markdown_renders_fail_range_and_legend():
