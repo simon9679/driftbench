@@ -9,8 +9,6 @@ belief graph; scoring uses the CANONICAL metrics from driftbench_core.core
 Providers:
   --provider cerebras   OpenAI SDK, base_url=cerebras, reasoning models (gpt-oss,
                         zai-glm). reasoning_effort=low, large max_tokens.
-  --provider github     OpenAI SDK, GitHub Models (base_url=models.github.ai),
-                        non-reasoning instruct models (openai/gpt-4.1). Key=GITHUB_TOKEN.
   --provider anthropic  anthropic SDK, Claude Haiku/Sonnet. Key=ANTHROPIC_API_KEY.
 
 LESSON (from the zai-glm-4.7 run): reasoning models spend the whole token budget
@@ -25,9 +23,6 @@ invents its own ids and CER collapses to 0 (the trap the TBG pack hit).
 Usage (PowerShell, from repo root):
     # Cerebras (reasoning) — key from _cerebras.env
     py run_baselines.py --provider cerebras --model gpt-oss-120b
-
-    # GitHub Models (non-reasoning) — key from GITHUB_TOKEN
-    py run_baselines.py --provider github --model openai/gpt-4.1
 
     # Anthropic — key from ANTHROPIC_API_KEY
     py run_baselines.py --provider anthropic --model claude-haiku-4-5
@@ -69,18 +64,14 @@ from driftbench_core.core import (  # noqa: E402
 
 # ─── Provider config ─────────────────────────────────────────────────────────
 CEREBRAS_BASE_URL = "https://api.cerebras.ai/v1"
-GITHUB_BASE_URL = "https://models.github.ai/inference"
-GITHUB_LEGACY_BASE_URL = "https://models.inference.ai.azure.com"  # 404 fallback
-GITHUB_LEGACY_MODEL = "gpt-4o"
 
 PROVIDER_DEFAULTS = {
     # reasoning models need a large budget; non-reasoning ones stop early.
     "cerebras":  {"max_tokens": 20000, "reasoning_effort": "low"},
-    "github":    {"max_tokens": 4000,  "reasoning_effort": None},
     "anthropic": {"max_tokens": 4000,  "reasoning_effort": None},
 }
 
-RPS_DELAY_SECONDS = 13  # free-tier rate limits (cerebras / github ~10 RPM)
+RPS_DELAY_SECONDS = 13  # free-tier rate limits (cerebras ~10 RPM)
 MAX_RETRIES = 4
 METRICS = ["CER", "GCS", "BDA", "ISS", "NRS"]
 
@@ -112,8 +103,6 @@ def get_api_key(provider: str) -> str:
                 if line.startswith("CEREBRAS_API_KEY="):
                     return line.split("=", 1)[1].strip()
         sys.exit("CEREBRAS_API_KEY not set (env var or _cerebras.env)")
-    if provider == "github":
-        return _key_from_env_or_file("GITHUB_TOKEN", ROOT / "_github.env")
     if provider == "anthropic":
         return _key_from_env_or_file("ANTHROPIC_API_KEY", ROOT / "_anthropic.env")
     sys.exit(f"unknown provider: {provider}")
@@ -197,19 +186,6 @@ def call_cerebras(prompt, model, max_tokens, reasoning_effort):
     return _openai_create_with_retry(client, model, prompt, max_tokens, reasoning_effort)
 
 
-def call_github(prompt, model, max_tokens, reasoning_effort):
-    from openai import OpenAI, NotFoundError
-    key = get_api_key("github")
-    client = OpenAI(api_key=key, base_url=GITHUB_BASE_URL)
-    try:
-        return _openai_create_with_retry(client, model, prompt, max_tokens, None)
-    except NotFoundError:
-        # New endpoint/model not found → legacy Azure endpoint + gpt-4o.
-        print(f"      404 on {model} @ github.ai — falling back to legacy endpoint + {GITHUB_LEGACY_MODEL}")
-        legacy = OpenAI(api_key=key, base_url=GITHUB_LEGACY_BASE_URL)
-        return _openai_create_with_retry(legacy, GITHUB_LEGACY_MODEL, prompt, max_tokens, None)
-
-
 def call_anthropic(prompt, model, max_tokens, reasoning_effort):
     import anthropic
     client = anthropic.Anthropic(api_key=get_api_key("anthropic"))
@@ -234,7 +210,7 @@ def call_anthropic(prompt, model, max_tokens, reasoning_effort):
     raise RuntimeError(f"exhausted {MAX_RETRIES} retries: {last}")
 
 
-CALLERS = {"cerebras": call_cerebras, "github": call_github, "anthropic": call_anthropic}
+CALLERS = {"cerebras": call_cerebras, "anthropic": call_anthropic}
 
 
 # ─── Run ─────────────────────────────────────────────────────────────────────
@@ -391,10 +367,19 @@ def _model_block(summary: dict) -> str:
             f"`NRS=1.0` from an empty graph) reflect **no usable output, not belief "
             f"tracking**. They are excluded from the mean.\n")
 
+    hist_note = ""
+    if p.get("provider") == "github":
+        hist_note = (
+            "\n> 🕰 **Historical — not reproducible.** These numbers were measured via "
+            "GitHub Models, which GitHub shut down on **2026-07-30** (playground, model "
+            "catalog, inference API and BYOK endpoints — for everyone, including existing "
+            "users). The table is kept as a record of the measurement; the endpoint no "
+            "longer exists, so it cannot be re-run.\n")
+
     return f"""### `{p.get('model')}`
 
 {prov_line}
-{cov_note}
+{cov_note}{hist_note}
 | Scenario | CER | GCS | BDA | ISS | NRS |
 |----------|-----|-----|-----|-----|-----|
 {chr(10).join(rows)}
@@ -428,10 +413,18 @@ not official certificates**.
 Low scores here are **expected headroom** for an early benchmark — they mark the
 gap a stronger system is meant to close, not a bug in the harness.
 
-Reasoning models (e.g. `zai-glm-4.7`) spend their token budget on hidden reasoning
-and truncate / malform the JSON — hence the coverage caveats. Non-reasoning
-instruct models emit valid JSON reliably and are the fair comparison points.
+Reasoning models spend their token budget on hidden reasoning and truncate /
+malform the JSON — hence the coverage caveats. Non-reasoning instruct models emit
+valid JSON reliably and are the fair comparison points.
 """
+    # Append the repeated-run variance section (offline, from baselines/variance/).
+    try:
+        sys.path.insert(0, str(ROOT))
+        from baselines.variance_report import build_section
+        md += "\n" + build_section()
+    except Exception as exc:  # never let the variance section break a run
+        print(f"  (variance section skipped: {exc})")
+
     (ROOT / "baselines" / "BASELINES.md").write_text(md, encoding="utf-8")
     print(f"  Wrote baselines/BASELINES.md ({len(summaries)} model block(s))")
 
@@ -447,7 +440,7 @@ def main():
 
     ap = argparse.ArgumentParser()
     ap.add_argument("--provider", default="cerebras",
-                    choices=["cerebras", "github", "anthropic"])
+                    choices=["cerebras", "anthropic"])
     ap.add_argument("--model", default="gpt-oss-120b")
     ap.add_argument("--delay", type=int, default=RPS_DELAY_SECONDS)
     ap.add_argument("--max-tokens", type=int, default=None,

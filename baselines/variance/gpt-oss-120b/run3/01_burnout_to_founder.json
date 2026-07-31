@@ -1,0 +1,175 @@
+{
+  "spec": "1.0.0",
+  "scenario_id": "01_burnout_to_founder",
+  "provider": "cerebras",
+  "model": "gpt-oss-120b",
+  "temperature": 0,
+  "max_tokens": 20000,
+  "reasoning_effort": "low",
+  "run_utc": "2026-07-31T06:05:37.533299+00:00",
+  "scores": {
+    "CER": 0.3333333333333333,
+    "GCS": null,
+    "BDA": 1.0,
+    "ISS": 0.8000000000000002,
+    "NRS": null
+  },
+  "note": null,
+  "foreign_core_ids": [],
+  "state": {
+    "nodes": [
+      {
+        "id": "n1",
+        "label": "Founder Identity",
+        "core_id": "ID_FOUNDER",
+        "mapping_confidence": 0.9,
+        "confidence": 0.8,
+        "evidence_turn": 11,
+        "text_hash": "sha256:21c11ffc5b1935725eb28f8c714e2033528529e753f46ebb6031e88bd392ed9e"
+      },
+      {
+        "id": "n2",
+        "label": "Employee Identity",
+        "core_id": "ID_EMPLOYEE",
+        "mapping_confidence": 0.9,
+        "confidence": 0.2,
+        "evidence_turn": 1,
+        "text_hash": "sha256:c851ca182fc989f60872a0274b936453ffaa05b935d375a4650cad33b6d8f291"
+      },
+      {
+        "id": "n3",
+        "label": "Financial Security",
+        "core_id": "V_FIN_SECURITY",
+        "mapping_confidence": 0.9,
+        "confidence": 0.4,
+        "evidence_turn": 2,
+        "text_hash": "sha256:34f9a419f444e308004d1840394731cb0f38d9239d154c353162fcca73937704"
+      },
+      {
+        "id": "n4",
+        "label": "Growth / Impact",
+        "core_id": "V_GROWTH",
+        "mapping_confidence": 0.9,
+        "confidence": 0.8,
+        "evidence_turn": 1,
+        "text_hash": "sha256:c851ca182fc989f60872a0274b936453ffaa05b935d375a4650cad33b6d8f291"
+      },
+      {
+        "id": "n5",
+        "label": "Fear of Failure",
+        "core_id": "F_FAILURE",
+        "mapping_confidence": 0.9,
+        "confidence": 0.2,
+        "evidence_turn": 2,
+        "text_hash": "sha256:34f9a419f444e308004d1840394731cb0f38d9239d154c353162fcca73937704"
+      },
+      {
+        "id": "n6",
+        "label": "Fear of Stagnation",
+        "core_id": "F_STAGNATION",
+        "mapping_confidence": 0.9,
+        "confidence": 0.2,
+        "evidence_turn": 1,
+        "text_hash": "sha256:c851ca182fc989f60872a0274b936453ffaa05b935d375a4650cad33b6d8f291"
+      },
+      {
+        "id": "n7",
+        "label": "MVP Launch Goal",
+        "core_id": "G_MVP_LAUNCH",
+        "mapping_confidence": 0.9,
+        "confidence": 0.9,
+        "evidence_turn": 5,
+        "text_hash": "sha256:88406bdfc821a36369e6f6c14b6170aaea04587301c7f556f12e4bfa1e8066e8"
+      },
+      {
+        "id": "n8",
+        "label": "Career Advancement Goal",
+        "core_id": "G_PROMOTION",
+        "mapping_confidence": 0.9,
+        "confidence": 0.1,
+        "evidence_turn": 1,
+        "text_hash": "sha256:c851ca182fc989f60872a0274b936453ffaa05b935d375a4650cad33b6d8f291"
+      }
+    ],
+    "edges": [
+      {
+        "source_id": "n1",
+        "target_id": "n2",
+        "source_core_id": "ID_FOUNDER",
+        "target_core_id": "ID_EMPLOYEE",
+        "relation": "contradicts",
+        "created_at_turn": 3,
+        "evidence_turn": 3,
+        "text_hash": "sha256:34856bcfb9d75199c9a891854dc5bd20ed08e8b842a6f2d7ffa755922b5b3f1c"
+      },
+      {
+        "source_id": "n3",
+        "target_id": "n4",
+        "source_core_id": "V_FIN_SECURITY",
+        "target_core_id": "V_GROWTH",
+        "relation": "blocks",
+        "created_at_turn": 2,
+        "evidence_turn": 2,
+        "text_hash": "sha256:34f9a419f444e308004d1840394731cb0f38d9239d154c353162fcca73937704"
+      }
+    ],
+    "transitions": [
+      {
+        "node_id": "n1",
+        "core_id": "ID_FOUNDER",
+        "turn": 11,
+        "delta": 0.3,
+        "trigger_text_hash": "sha256:21c11ffc5b1935725eb28f8c714e2033528529e753f46ebb6031e88bd392ed9e"
+      },
+      {
+        "node_id": "n2",
+        "core_id": "ID_EMPLOYEE",
+        "turn": 11,
+        "delta": -0.3,
+        "trigger_text_hash": "sha256:21c11ffc5b1935725eb28f8c714e2033528529e753f46ebb6031e88bd392ed9e"
+      },
+      {
+        "node_id": "n3",
+        "core_id": "V_FIN_SECURITY",
+        "turn": 11,
+        "delta": -0.2,
+        "trigger_text_hash": "sha256:21c11ffc5b1935725eb28f8c714e2033528529e753f46ebb6031e88bd392ed9e"
+      },
+      {
+        "node_id": "n4",
+        "core_id": "V_GROWTH",
+        "turn": 11,
+        "delta": 0.3,
+        "trigger_text_hash": "sha256:21c11ffc5b1935725eb28f8c714e2033528529e753f46ebb6031e88bd392ed9e"
+      },
+      {
+        "node_id": "n5",
+        "core_id": "F_FAILURE",
+        "turn": 10,
+        "delta": -0.3,
+        "trigger_text_hash": "sha256:0cac47db289767a139adb851d25510dcbe893d5aef3734005241733cfd1dba0a"
+      },
+      {
+        "node_id": "n6",
+        "core_id": "F_STAGNATION",
+        "turn": 10,
+        "delta": -0.3,
+        "trigger_text_hash": "sha256:0cac47db289767a139adb851d25510dcbe893d5aef3734005241733cfd1dba0a"
+      },
+      {
+        "node_id": "n7",
+        "core_id": "G_MVP_LAUNCH",
+        "turn": 8,
+        "delta": 0.4,
+        "trigger_text_hash": "sha256:dc3b2510b3f997f5e2b7cb1a162ca41d570e5e10f76b7172016bf00898616e04"
+      },
+      {
+        "node_id": "n8",
+        "core_id": "G_PROMOTION",
+        "turn": 11,
+        "delta": -0.2,
+        "trigger_text_hash": "sha256:21c11ffc5b1935725eb28f8c714e2033528529e753f46ebb6031e88bd392ed9e"
+      }
+    ]
+  }
+}
