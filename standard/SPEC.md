@@ -50,6 +50,14 @@ Every evaluated system must submit a JSON document with:
 
 GCS checks that conflict edges (blocks/contradicts) are followed by net-negative movement of the target belief within k=3 turns. If the target grows instead, the edge is not counted as causal. Zero-baseline edges require impact_energy ≥ 0.1 (absolute threshold) to avoid false positives from trivial fluctuations.
 
+GCS is a **proxy** with known fragility around these zero-baseline edges — and repeated runs have now
+turned that assumption into a measurement. Across three identical runs of the same model
+(`temperature=0`, nothing changed between runs), GCS was the **most unstable of the five metrics**:
+**Δ0.17 on the aggregate** and **up to Δ0.50 on individual scenarios**, more than any other metric
+(CER/BDA up to Δ0.25, ISS up to Δ0.20). See the repeated-run variance table in
+[`../baselines/BASELINES.md`](../baselines/BASELINES.md). Treat single-run GCS values with particular
+caution.
+
 ## Zero-trust validation
 
 The validator rejects submissions for:

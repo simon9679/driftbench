@@ -100,6 +100,11 @@ See [`adapters/template_adapter.py`](adapters/template_adapter.py) for a complet
 
 All metrics are deterministic. No LLM judge. Same input → same scores, always.
 
+> **Known NRS defect (v1.1 fix candidate).** An empty belief graph — e.g. from a parse failure —
+> currently scores **NRS = 1.00**, the maximum. A system that emits nothing is credited with perfect
+> noise resistance. Found only by repeated runs; details in
+> [`baselines/BASELINES.md`](baselines/BASELINES.md). v1 is frozen, so the behaviour is unchanged in v1.
+
 ## v1 Ontology (8 concepts)
 
 | Category | Concepts |
@@ -125,7 +130,9 @@ The ontology is frozen for v1. See [`standard/v1/ontology.json`](standard/v1/ont
 | 10 | Delayed Contradiction |
 | 11 | Noise Resistance |
 
-All scenarios in [`standard/v1/scenarios/`](standard/v1/scenarios/).
+All scenarios in [`standard/v1/scenarios/`](standard/v1/scenarios/). The same 7 scenarios and the
+frozen ontology are also published as a dataset:
+[huggingface.co/datasets/simon9679/driftbench-v1](https://huggingface.co/datasets/simon9679/driftbench-v1).
 
 ## Baselines
 
@@ -199,6 +206,11 @@ relabel (K=20), and the finding that subset-level capability claims are dominate
 stochasticity. DriftBench takes the deterministic route (no LLM judge); the ES-MemEval study
 calibrates the LLM-judge route. See [`eval_reliability/`](eval_reliability/) — now covers five
 ingest-variance data points and two pre-registered negative product gates.
+
+That reliability study is published as [`simon9679/tbg-postmortem`](https://github.com/simon9679/tbg-postmortem):
+it grew out of a *negative* result on a belief-memory engine (TBG), which failed to beat simple
+baselines. DriftBench is the tool built to satisfy the falsification protocol worked out there —
+a deterministic, no-LLM-judge benchmark. See the postmortem for the protocol; it is not retold here.
 
 **Belief-revision benchmarks.** Recent work (e.g. BeliefShift, and the broader belief-revision /
 contradiction line such as STALE and TOKI) targets the same real failure mode we care about —
