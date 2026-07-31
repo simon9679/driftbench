@@ -100,20 +100,20 @@ valid JSON reliably and are the fair comparison points.
 | 04_failure_recovery_to_launch | 0.2500 | 0.5000 | 0.2500 | 0.3333 (0.25–0.50, Δ0.25) |
 | 05_promotion_after_launch | 0.2857 | 0.2857 | 0.2857 | 0.2857 (0.29–0.29, Δ0.00) |
 | 10_delayed_contradiction | 0.3333 | 0.4000 | 0.4000 | 0.3778 (0.33–0.40, Δ0.07) |
-| 11_noise_resistance | 0.0000 | 0.0000 | 0.0000 | 0.0000 (0.00–0.00, Δ0.00) |
-| **benchmark mean** | 0.2432 | 0.2884 | 0.2646 | 0.2654 (0.24–0.29, Δ0.05) |
+| 11_noise_resistance | 0.0000 | fail | fail | 0.0000 (1/3 runs — range needs ≥2 good runs) |
+| **benchmark mean** | 0.2432 | 0.3365 | 0.3087 | 0.2961 (0.24–0.34, Δ0.09) |
 
 **GCS**
 
 | Scenario | run1 | run2 | run3 | mean (min–max, Δrange) |
 |---|---|---|---|---|
-| 01_burnout_to_founder | 0.0000 | 0.0000 | — | 0.0000 (0.00–0.00, Δ0.00) |
+| 01_burnout_to_founder | 0.0000 | 0.0000 | — | 0.0000 (0.00–0.00, Δ0.00) (2/3 runs) |
 | 02_promotion_vs_founder | 1.0000 | 0.5000 | 0.5000 | 0.6667 (0.50–1.00, Δ0.50) |
-| 03_financial_identity | 0.0000 | — | 0.0000 | 0.0000 (0.00–0.00, Δ0.00) |
+| 03_financial_identity | 0.0000 | — | 0.0000 | 0.0000 (0.00–0.00, Δ0.00) (2/3 runs) |
 | 04_failure_recovery_to_launch | 0.5000 | 0.2500 | 0.5000 | 0.4167 (0.25–0.50, Δ0.25) |
 | 05_promotion_after_launch | 0.3333 | 0.3333 | 0.3333 | 0.3333 (0.33–0.33, Δ0.00) |
 | 10_delayed_contradiction | 0.5000 | 0.0000 | 0.0000 | 0.1667 (0.00–0.50, Δ0.50) |
-| 11_noise_resistance | — | — | — | — |
+| 11_noise_resistance | — | fail | fail | — (2/3 failed, no data) |
 | **benchmark mean** | 0.3889 | 0.2167 | 0.2667 | 0.2907 (0.22–0.39, Δ0.17) |
 
 **BDA**
@@ -126,8 +126,8 @@ valid JSON reliably and are the fair comparison points.
 | 04_failure_recovery_to_launch | 0.8333 | 0.8333 | 0.8333 | 0.8333 (0.83–0.83, Δ0.00) |
 | 05_promotion_after_launch | 0.5714 | 0.5714 | 0.5714 | 0.5714 (0.57–0.57, Δ0.00) |
 | 10_delayed_contradiction | 0.5000 | 0.2500 | 0.2500 | 0.3333 (0.25–0.50, Δ0.25) |
-| 11_noise_resistance | 0.3333 | 0.0000 | 0.0000 | 0.1111 (0.00–0.33, Δ0.33) |
-| **benchmark mean** | 0.5969 | 0.5136 | 0.5374 | 0.5493 (0.51–0.60, Δ0.08) |
+| 11_noise_resistance | 0.3333 | fail | fail | 0.3333 (1/3 runs — range needs ≥2 good runs) |
+| **benchmark mean** | 0.5969 | 0.5992 | 0.6270 | 0.6077 (0.60–0.63, Δ0.03) |
 
 **ISS**
 
@@ -139,8 +139,8 @@ valid JSON reliably and are the fair comparison points.
 | 04_failure_recovery_to_launch | 0.5200 | 0.6000 | 0.5200 | 0.5467 (0.52–0.60, Δ0.08) |
 | 05_promotion_after_launch | 0.8000 | 0.8000 | 0.8000 | 0.8000 (0.80–0.80, Δ0.00) |
 | 10_delayed_contradiction | 0.0000 | 0.0000 | 0.0000 | 0.0000 (0.00–0.00, Δ0.00) |
-| 11_noise_resistance | 0.0000 | 0.0000 | 0.0000 | 0.0000 (0.00–0.00, Δ0.00) |
-| **benchmark mean** | 0.4457 | 0.4457 | 0.4057 | 0.4324 (0.41–0.45, Δ0.04) |
+| 11_noise_resistance | 0.0000 | fail | fail | 0.0000 (1/3 runs — range needs ≥2 good runs) |
+| **benchmark mean** | 0.4457 | 0.5200 | 0.4733 | 0.4797 (0.45–0.52, Δ0.07) |
 
 **NRS**
 
@@ -152,8 +152,26 @@ valid JSON reliably and are the fair comparison points.
 | 04_failure_recovery_to_launch | — | — | — | — |
 | 05_promotion_after_launch | — | — | — | — |
 | 10_delayed_contradiction | — | — | — | — |
-| 11_noise_resistance | 0.0000 | 1.0000 | 1.0000 | 0.6667 (0.00–1.00, Δ1.00) |
-| **benchmark mean** | 0.0000 | 1.0000 | 1.0000 | 0.6667 (0.00–1.00, Δ1.00) |
+| 11_noise_resistance | 0.0000 | fail | fail | 0.0000 (1/3 runs — range needs ≥2 good runs) |
+| **benchmark mean** | 0.0000 | — | — | 0.0000 (1/3 runs — range needs ≥2 good runs) |
+
+_Legend: `—` = metric undefined for that scenario · `fail` = the run's JSON did not parse (empty state); `fail` runs are excluded from min / max / range / mean._
 
 
-**What to take from this.** Numbers that read as clean in a one-shot table move on repeat — some cells not at all, others by a large margin (the Δrange column). The widest single (scenario, metric) swing here was **Δ1.00**. A single run of a single model on a single scenario is not a measurement; do not rank systems on one run. And 3 runs of one model on seven scenarios is itself a small sample — it says nothing beyond this exact configuration, and a small spread here is not proof of reliability.
+### What the spread shows
+
+On the runs that answered, metrics diverge noticeably between identical repeats: CER up to **Δ0.25** · GCS up to **Δ0.50** · BDA up to **Δ0.25** · ISS up to **Δ0.20**.
+
+Separately, **2 of 21 runs did not parse** (empty state) and are marked `fail`; they are excluded from the variance figures above. Both parse failures fell on the same scenario (`11_noise_resistance`), but three runs are too few to conclude why, and no cause is claimed here.
+
+The takeaway is unchanged and is not softened: a single run of a single model on a single scenario is not a measurement — systems must not be ranked on one run.
+
+## Metric defect (v1.1 candidate): empty state scores NRS = 1.00
+
+On repeated runs, 2 of 21 scored responses failed to parse and produced an empty belief graph (`{"nodes": [], "edges": [], "transitions": []}`). The benchmark assigned that empty state **NRS = 1.00 — the maximum** noise-resistance score. On the run that answered, the same scenario scored NRS = 0.00.
+
+This is a defect in the metric's semantics, not a scoring bug: a system that emits nothing is credited with perfect resistance to noise. The logic is understandable (no beliefs, nothing to shift) but the result is absurd and easy to exploit — a silent adapter earns top marks.
+
+**The v1 specification is frozen, so v1 behaviour does not change.** The defect is recorded and carried to v1.1 as a fix candidate. Proposed direction (named, not implemented here): an empty or invalid state should yield an *undefined* result, not a maximum score.
+
+**This defect was found by repeated runs and could not have been found any other way.** A single run gave NRS = 0.00 on scenario 11 and raised no questions — the same input scored the opposite once its parse failed on repeat. That is the direct point of running more than once.
