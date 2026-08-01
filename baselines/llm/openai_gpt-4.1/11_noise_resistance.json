@@ -1,5 +1,5 @@
 {
-  "spec": "1.0.1",
+  "spec": "1.1.0",
   "scenario_id": "11_noise_resistance",
   "provider": "github",
   "model": "openai/gpt-4.1",

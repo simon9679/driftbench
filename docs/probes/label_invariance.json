@@ -1,0 +1,144 @@
+{
+  "config": {
+    "seeds": 500,
+    "states_used": 19,
+    "states_skipped_parse_error": 2,
+    "permutations": 9500,
+    "source": "baselines/variance/gpt-oss-120b/{run1,run2,run3}"
+  },
+  "metrics": {
+    "CER": {
+      "mean_before": 0.2934,
+      "mean_after": 0.0606,
+      "pct_unchanged": 21.5,
+      "pct_improved_pathological": 1.9,
+      "n_defined_before": 9500,
+      "examples_improved": [
+        {
+          "state": "run1/04_failure_recovery_to_launch",
+          "seed": 0,
+          "before": 0.25,
+          "after": 0.5
+        },
+        {
+          "state": "run1/11_noise_resistance",
+          "seed": 0,
+          "before": 0.0,
+          "after": 0.4
+        },
+        {
+          "state": "run3/04_failure_recovery_to_launch",
+          "seed": 0,
+          "before": 0.25,
+          "after": 0.5
+        },
+        {
+          "state": "run1/11_noise_resistance",
+          "seed": 15,
+          "before": 0.0,
+          "after": 0.4
+        },
+        {
+          "state": "run1/11_noise_resistance",
+          "seed": 19,
+          "before": 0.0,
+          "after": 0.4
+        }
+      ]
+    },
+    "GCS": {
+      "mean_before": 0.25,
+      "mean_after": 0.25,
+      "pct_unchanged": 100.0,
+      "pct_improved_pathological": 0.0,
+      "n_defined_before": 9500,
+      "examples_improved": []
+    },
+    "BDA": {
+      "mean_before": 0.6071,
+      "mean_after": 0.4006,
+      "pct_unchanged": 26.0,
+      "pct_improved_pathological": 7.8,
+      "n_defined_before": 9500,
+      "examples_improved": [
+        {
+          "state": "run1/10_delayed_contradiction",
+          "seed": 0,
+          "before": 0.5,
+          "after": 0.75
+        },
+        {
+          "state": "run1/11_noise_resistance",
+          "seed": 0,
+          "before": 0.3333,
+          "after": 0.6667
+        },
+        {
+          "state": "run2/10_delayed_contradiction",
+          "seed": 0,
+          "before": 0.25,
+          "after": 0.5
+        },
+        {
+          "state": "run3/10_delayed_contradiction",
+          "seed": 0,
+          "before": 0.25,
+          "after": 0.5
+        },
+        {
+          "state": "run1/10_delayed_contradiction",
+          "seed": 2,
+          "before": 0.5,
+          "after": 0.75
+        }
+      ]
+    },
+    "ISS": {
+      "mean_before": 0.4779,
+      "mean_after": 0.1779,
+      "pct_unchanged": 35.2,
+      "pct_improved_pathological": 14.4,
+      "n_defined_before": 9500,
+      "examples_improved": [
+        {
+          "state": "run1/02_promotion_vs_founder",
+          "seed": 0,
+          "before": 0.8,
+          "after": 1.0
+        },
+        {
+          "state": "run1/04_failure_recovery_to_launch",
+          "seed": 0,
+          "before": 0.52,
+          "after": 0.7
+        },
+        {
+          "state": "run1/10_delayed_contradiction",
+          "seed": 0,
+          "before": 0.0,
+          "after": 0.2
+        },
+        {
+          "state": "run1/11_noise_resistance",
+          "seed": 0,
+          "before": 0.0,
+          "after": 0.4
+        },
+        {
+          "state": "run2/02_promotion_vs_founder",
+          "seed": 0,
+          "before": 0.72,
+          "after": 1.0
+        }
+      ]
+    },
+    "NRS": {
+      "mean_before": 0.0,
+      "mean_after": 0.0,
+      "pct_unchanged": 100.0,
+      "pct_improved_pathological": 0.0,
+      "n_defined_before": 500,
+      "examples_improved": []
+    }
+  }
+}

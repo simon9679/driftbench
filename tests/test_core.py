@@ -327,6 +327,44 @@ def test_C11_nrs_undefined_on_empty_state():
 
 
 # ===========================================================================
+# Group C2 — 1.1.0 degenerate-input semantics (GCS case A/B, ISS symmetry, oracle)
+# ===========================================================================
+
+def test_gcs_zero_when_edges_present_but_no_window_transitions():
+    """Case A: a conflict edge is declared but its target never moves in the
+    window — a causality failure, scored 0.0 (was None before 1.1.0)."""
+    edges = [_edge_simple("ID_EMPLOYEE", "ID_FOUNDER")]  # created_at_turn=1
+    assert compute_gcs(edges, []) == 0.0
+
+
+def test_gcs_none_when_no_conflict_edges():
+    """Case B: no blocks/contradicts edge at all — nothing to measure → None."""
+    edges = [_edge_simple("ID_EMPLOYEE", "ID_FOUNDER", rel="supports")]
+    trs = [_trs_simple("ID_FOUNDER", 2, -0.2)]
+    assert compute_gcs(edges, trs) is None
+
+
+def test_iss_zero_when_source_concept_missing():
+    """Symmetry (1.1.0): a missing source concept scores 0.0, like a missing
+    target — not None."""
+    nodes = [_node_simple("V_GROWTH", 0.9)]  # to_id present, from_id absent
+    gt = {"from_id": "V_FIN_SECURITY", "to_id": "V_GROWTH"}
+    assert compute_iss(nodes, gt) == 0.0
+
+
+def test_oracle_reaches_maximum():
+    """Gate guard: the oracle built from ground truth reaches 1.0 on
+    CER/GCS/BDA/ISS (protects against a regression that lowers the ceiling)."""
+    import sys
+    sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "dev-scripts" / "probes"))
+    from oracle_probe import score_oracle, _load_json, SCEN_DIR
+    res = score_oracle(_load_json(SCEN_DIR / "01_burnout_to_founder.json"))
+    assert res["status"] == "VALIDATED"
+    for m in ("CER", "GCS", "BDA", "ISS"):
+        assert res["scores"][m] == 1.0
+
+
+# ===========================================================================
 # Group D — evaluate() end-to-end
 # ===========================================================================
 

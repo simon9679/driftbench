@@ -1,6 +1,6 @@
 # DriftBench LLM Baselines
 
-**Spec:** `1.0.1`  ·  Pure LLM baselines over the 7 official v1 scenarios — the
+**Spec:** `1.1.0`  ·  Pure LLM baselines over the 7 official v1 scenarios — the
 LLM builds the belief graph, scoring uses the canonical `driftbench_core` metrics.
 Dash (—) = metric not applicable to that scenario (null).
 
@@ -13,11 +13,11 @@ Dash (—) = metric not applicable to that scenario (null).
 | 01_burnout_to_founder | 0.0000 | 0.6667 | 1.0000 | 1.0000 | — |
 | 02_promotion_vs_founder | 0.2857 | 0.0000 | 0.8571 | 1.0000 | — |
 | 03_financial_identity | 0.6667 | 0.0000 | 0.7500 | 0.0000 | — |
-| 04_failure_recovery_to_launch | 0.5714 | — | 0.6667 | 0.4600 | — |
+| 04_failure_recovery_to_launch | 0.5714 | 0.0000 | 0.6667 | 0.4600 | — |
 | 05_promotion_after_launch | 0.0000 | 0.5000 | 1.0000 | 0.9200 | — |
 | 10_delayed_contradiction | 0.2857 | 0.0000 | 0.7500 | 0.0000 | — |
 | 11_noise_resistance | 0.0000 | 0.3333 | 0.6667 | 1.0000 | 0.0000 |
-| **mean (valid only, n=7)** | 0.2585 | 0.2500 | 0.8129 | 0.6257 | 0.0000 |
+| **mean (valid only, n=7)** | 0.2585 | 0.2143 | 0.8129 | 0.6257 | 0.0000 |
 
 ### `gpt-oss-120b`
 
@@ -31,8 +31,8 @@ Dash (—) = metric not applicable to that scenario (null).
 | 04_failure_recovery_to_launch | 0.3333 | 0.5000 | 0.8333 | 0.4000 | — |
 | 05_promotion_after_launch | 0.5714 | 0.0000 | 0.7143 | 0.7200 | — |
 | 10_delayed_contradiction | 0.0000 | 0.0000 | 0.2500 | 0.0000 | — |
-| 11_noise_resistance | 0.0000 | — | 0.6667 | 1.0000 | 0.0000 |
-| **mean (valid only, n=7)** | 0.2629 | 0.1944 | 0.6769 | 0.5057 | 0.0000 |
+| 11_noise_resistance | 0.0000 | 0.0000 | 0.6667 | 1.0000 | 0.0000 |
+| **mean (valid only, n=7)** | 0.2629 | 0.1667 | 0.6769 | 0.5057 | 0.0000 |
 
 ### `openai/gpt-4.1`
 
@@ -61,12 +61,12 @@ Dash (—) = metric not applicable to that scenario (null).
 |----------|-----|-----|-----|-----|-----|
 | 01_burnout_to_founder ⚠ | 0.0000 | — | 0.0000 | 0.0000 | — |
 | 02_promotion_vs_founder ⚠ | 0.0000 | — | 0.0000 | 0.0000 | — |
-| 03_financial_identity | 0.2857 | — | 0.7500 | 0.0000 | — |
+| 03_financial_identity | 0.2857 | 0.0000 | 0.7500 | 0.0000 | — |
 | 04_failure_recovery_to_launch ⚠ | 0.0000 | — | 0.0000 | 0.0000 | — |
 | 05_promotion_after_launch ⚠ | 0.0000 | — | 0.0000 | 0.0000 | — |
 | 10_delayed_contradiction ⚠ | 0.0000 | — | 0.0000 | 0.0000 | — |
 | 11_noise_resistance ⚠ | 0.0000 | — | 0.0000 | 0.0000 | — |
-| **mean (valid only, n=1)** | 0.2857 | — | 0.7500 | 0.0000 | — |
+| **mean (valid only, n=1)** | 0.2857 | 0.0000 | 0.7500 | 0.0000 | — |
 
 ## Provenance & honesty note
 
@@ -107,14 +107,14 @@ valid JSON reliably and are the fair comparison points.
 
 | Scenario | run1 | run2 | run3 | mean (min–max, Δrange) |
 |---|---|---|---|---|
-| 01_burnout_to_founder | 0.0000 | 0.0000 | — | 0.0000 (0.00–0.00, Δ0.00) (2/3 runs) |
+| 01_burnout_to_founder | 0.0000 | 0.0000 | 0.0000 | 0.0000 (0.00–0.00, Δ0.00) |
 | 02_promotion_vs_founder | 1.0000 | 0.5000 | 0.5000 | 0.6667 (0.50–1.00, Δ0.50) |
-| 03_financial_identity | 0.0000 | — | 0.0000 | 0.0000 (0.00–0.00, Δ0.00) (2/3 runs) |
+| 03_financial_identity | 0.0000 | 0.0000 | 0.0000 | 0.0000 (0.00–0.00, Δ0.00) |
 | 04_failure_recovery_to_launch | 0.5000 | 0.2500 | 0.5000 | 0.4167 (0.25–0.50, Δ0.25) |
 | 05_promotion_after_launch | 0.3333 | 0.3333 | 0.3333 | 0.3333 (0.33–0.33, Δ0.00) |
 | 10_delayed_contradiction | 0.5000 | 0.0000 | 0.0000 | 0.1667 (0.00–0.50, Δ0.50) |
-| 11_noise_resistance | — | fail | fail | — (2/3 failed, no data) |
-| **benchmark mean** | 0.3889 | 0.2167 | 0.2667 | 0.2907 (0.22–0.39, Δ0.17) |
+| 11_noise_resistance | 0.0000 | fail | fail | 0.0000 (1/3 runs — range needs ≥2 good runs) |
+| **benchmark mean** | 0.3333 | 0.1806 | 0.2222 | 0.2454 (0.18–0.33, Δ0.15) |
 
 **BDA**
 

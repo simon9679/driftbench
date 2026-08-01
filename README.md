@@ -1,7 +1,7 @@
 # DriftBench
 
 [![CI](https://github.com/simon9679/driftbench/actions/workflows/ci.yml/badge.svg)](https://github.com/simon9679/driftbench/actions/workflows/ci.yml)
-[![Version](https://img.shields.io/badge/spec-1.0.1-blue.svg)](standard/SPEC.md)
+[![Version](https://img.shields.io/badge/spec-1.1.0-blue.svg)](standard/SPEC.md)
 [![License](https://img.shields.io/badge/license-Apache--2.0-green.svg)](LICENSE)
 [![CITATION](https://img.shields.io/badge/cite-CITATION.cff-orange.svg)](CITATION.cff)
 
@@ -22,7 +22,7 @@ Output:
 
 ```json
 {
-  "spec": "1.0.1",
+  "spec": "1.1.0",
   "status": "VALIDATED",
   "scores": { "CER": 1.0, "GCS": 1.0, "BDA": 1.0, "ISS": 1.0, "NRS": null }
 }
@@ -90,20 +90,24 @@ See [`adapters/template_adapter.py`](adapters/template_adapter.py) for a complet
 
 ## Metrics
 
-| Metric | Full name | What it measures |
-|--------|-----------|-----------------|
-| **CER** | Conflict Edge Recovery | F1 against ground-truth conflict pairs |
-| **GCS** | Graph Causal Score | Do conflict edges cause downstream energy deviation? |
-| **BDA** | Belief Drift Accuracy | Do the right beliefs move in the right direction? |
-| **ISS** | Identity Shift Score | Does the target identity overtake the source? |
-| **NRS** | Noise Resistance Score | Does the system ignore irrelevant turns? |
+The metrics sit on **two layers** — *semantic* (judged against ground truth) and
+*structural / temporal* (internal coherence only). **They must not be averaged into one
+score**; see [Validity checks](#validity-checks).
+
+| Metric | Full name | Layer | What it measures |
+|--------|-----------|-------|-----------------|
+| **CER** | Conflict Edge Recovery | semantic | F1 against ground-truth conflict pairs |
+| **BDA** | Belief Drift Accuracy | semantic | Do the right beliefs move in the right direction? |
+| **ISS** | Identity Shift Score | semantic | Does the target identity overtake the source? |
+| **GCS** | Graph Causal Score | structural | Do the submission's *own* conflict edges precede target suppression? (**not** compared against ground truth) |
+| **NRS** | Noise Resistance Score | temporal | No belief moves on the noise *turns* (by turn index — not a semantic check) |
 
 All metrics are deterministic. No LLM judge. Same input → same scores, always.
 
-> **Known NRS defect (v1.1 fix candidate).** An empty belief graph — e.g. from a parse failure —
-> currently scores **NRS = 1.00**, the maximum. A system that emits nothing is credited with perfect
-> noise resistance. Found only by repeated runs; details in
-> [`baselines/BASELINES.md`](baselines/BASELINES.md). v1 is frozen, so the behaviour is unchanged in v1.
+> **NRS empty-state defect — fixed in 1.0.1.** An empty belief graph (e.g. from a parse
+> failure) used to score **NRS = 1.00**, the maximum; since 1.0.1 it returns *undefined*, so
+> a system that emits nothing is no longer credited with perfect noise resistance. Found only
+> by repeated runs; see [`CHANGELOG.md`](CHANGELOG.md).
 
 ## v1 Ontology (8 concepts)
 
@@ -170,6 +174,28 @@ Both paths use the canonical `driftbench_core` metrics, but neither is the
 tamper-checked zero-trust validator (no nonce, no hash chain) — treat these as
 orientation, not certificates.
 
+## Validity checks
+
+The benchmark checks itself, and publishes what it finds — following the falsification
+protocol from [`simon9679/tbg-postmortem`](https://github.com/simon9679/tbg-postmortem)
+(`FALSIFICATION_PROTOCOL.md`, rules 3/5/8: a degenerate-control canary before the
+expensive comparison, hypotheses written before the run, effects that must survive a
+repeat). Two offline probes live in [`dev-scripts/probes/`](dev-scripts/probes/); their
+outputs and a guide are in [`docs/probes/`](docs/probes/).
+
+- **Label-invariance** ([`label_invariance_probe.py`](dev-scripts/probes/label_invariance_probe.py)):
+  scrambling the concept labels on real states (9500 permutations) leaves **GCS and NRS
+  100% unchanged** — they measure structure/timing, not semantics — while CER/BDA/ISS
+  degrade. On a fraction of permutations the semantic metrics **improve** (ISS ≈ 14%,
+  BDA ≈ 8%, CER ≈ 2%; a Monte-Carlo estimate, not a constant), so a score is not by
+  itself proof the *right* concepts were tracked, and CER/BDA/ISS must not be averaged
+  with GCS/NRS.
+- **Oracle** ([`oracle_probe.py`](dev-scripts/probes/oracle_probe.py)): an ideal
+  submission built from ground truth reaches **1.000 on CER/GCS/BDA/ISS on all 7
+  scenarios**, so the metrics have a real, reachable maximum. Reaching GCS = 1.0 requires
+  knowing the formula (non-overlapping windows, escalating suppression energy), which is
+  itself GCS's gaming vector — documented in [`standard/SPEC.md`](standard/SPEC.md).
+
 ## Roadmap
 
 v1 is frozen for reproducibility; all future work is additive. Next up:
@@ -212,8 +238,10 @@ it grew out of a *negative* result on a belief-memory engine (TBG), which failed
 baselines. DriftBench is the tool built to satisfy the falsification protocol worked out there —
 a deterministic, no-LLM-judge benchmark. See the postmortem for the protocol; it is not retold here.
 
-**Belief-revision benchmarks.** Recent work (e.g. BeliefShift, and the broader belief-revision /
-contradiction line such as STALE and TOKI) targets the same real failure mode we care about —
+**Belief-revision benchmarks.** Recent work (e.g.
+[BeliefShift (Myakala et al., 2026)](https://arxiv.org/abs/2606.22030) — temporal belief
+consistency and cross-session opinion drift, our nearest neighbour; and the broader
+belief-revision / contradiction line such as STALE and TOKI) targets the same real failure mode we care about —
 agents treating stale or contradicted memories as authoritative. Our focus is complementary
 along two axes we make measurable rather than assert: (1) **scoring substrate** — DriftBench
 scores deterministically (no LLM judge in the loop), which sidesteps the judge-reliability

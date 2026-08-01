@@ -1,5 +1,5 @@
 {
-  "spec": "1.0.1",
+  "spec": "1.1.0",
   "scenario_id": "04_failure_recovery_to_launch",
   "provider": "cerebras",
   "model": "zai-glm-4.7",

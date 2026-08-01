@@ -1,0 +1,79 @@
+{
+  "01_burnout_to_founder": {
+    "status": "VALIDATED",
+    "ban_reason": null,
+    "scores": {
+      "CER": 1.0,
+      "GCS": 1.0,
+      "BDA": 1.0,
+      "ISS": 1.0,
+      "NRS": null
+    }
+  },
+  "02_promotion_vs_founder": {
+    "status": "VALIDATED",
+    "ban_reason": null,
+    "scores": {
+      "CER": 1.0,
+      "GCS": 1.0,
+      "BDA": 1.0,
+      "ISS": 1.0,
+      "NRS": null
+    }
+  },
+  "03_financial_identity": {
+    "status": "VALIDATED",
+    "ban_reason": null,
+    "scores": {
+      "CER": 1.0,
+      "GCS": 1.0,
+      "BDA": 1.0,
+      "ISS": 1.0,
+      "NRS": null
+    }
+  },
+  "04_failure_recovery_to_launch": {
+    "status": "VALIDATED",
+    "ban_reason": null,
+    "scores": {
+      "CER": 1.0,
+      "GCS": 1.0,
+      "BDA": 1.0,
+      "ISS": 1.0,
+      "NRS": null
+    }
+  },
+  "05_promotion_after_launch": {
+    "status": "VALIDATED",
+    "ban_reason": null,
+    "scores": {
+      "CER": 1.0,
+      "GCS": 1.0,
+      "BDA": 1.0,
+      "ISS": 1.0,
+      "NRS": null
+    }
+  },
+  "10_delayed_contradiction": {
+    "status": "VALIDATED",
+    "ban_reason": null,
+    "scores": {
+      "CER": 1.0,
+      "GCS": 1.0,
+      "BDA": 1.0,
+      "ISS": 1.0,
+      "NRS": null
+    }
+  },
+  "11_noise_resistance": {
+    "status": "VALIDATED",
+    "ban_reason": null,
+    "scores": {
+      "CER": 1.0,
+      "GCS": 1.0,
+      "BDA": 1.0,
+      "ISS": 1.0,
+      "NRS": 1.0
+    }
+  }
+}

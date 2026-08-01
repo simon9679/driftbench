@@ -1,5 +1,5 @@
 {
-  "spec": "1.0.1",
+  "spec": "1.1.0",
   "scenario_id": "02_promotion_vs_founder",
   "provider": "cerebras",
   "model": "gpt-oss-120b",
