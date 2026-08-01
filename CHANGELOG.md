@@ -20,6 +20,40 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ---
 
+## [1.1.0] — 2026-08-01
+
+### Changed
+- **GCS degenerate-input semantics.** `compute_gcs` no longer collapses two different
+  cases into `None`: conflict edges declared but with no target movement in the window
+  now score **0.0** (a causality failure), while genuinely having no conflict edges stays
+  `None` (nothing to measure — already penalized by CER). One published aggregate moves as
+  a result — repeated-run GCS spread **Δ0.17 → Δ0.15** (6 corpus values shift `None → 0.0`);
+  CER/BDA/ISS spreads are unchanged. A metric definition changed, so this is a minor release.
+- **ISS symmetry.** A missing *source* concept now scores **0.0**, matching the missing
+  *target* case, instead of the old `None`. 0 firings in the current corpus, so no
+  published number moves.
+
+### Added
+- **Validity probes** under `dev-scripts/probes/` (offline, deterministic, no keys): a
+  label-invariance probe (GCS/NRS 100% label-invariant; CER/BDA/ISS degrade and can
+  pathologically improve) and an oracle probe (an ideal submission reaches 1.000 on
+  CER/GCS/BDA/ISS on all 7 scenarios — the metrics have a reachable maximum). Outputs and
+  a guide under `docs/probes/`.
+
+### Documentation
+- **Overclaim removed from `SPEC.md`.** GCS and NRS are now described as **structural /
+  temporal** diagnostics (internal coherence / turn-level stability), **not** semantic
+  metrics — the probe shows both are 100% invariant to label scrambling. Added: the two
+  layers must not be averaged with CER/BDA/ISS; the GCS gaming vector (non-overlapping
+  windows + energy escalation, with scenario `03` as the worked example); and the
+  label-permutation reversal rates (ISS ≈ 14%, BDA ≈ 8%, CER ≈ 2%, a Monte-Carlo estimate).
+- README gains a **Validity checks** section; the stale "NRS defect is a v1.1 candidate"
+  note (left over from before the 1.0.1 fix) is corrected to "fixed in 1.0.1".
+- Related work cites **BeliefShift (Myakala et al., 2026)** and links the falsification
+  protocol the check follows.
+
+---
+
 ## [1.0.1] — 2026-08-01
 
 ### Fixed

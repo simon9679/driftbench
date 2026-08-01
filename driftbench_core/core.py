@@ -197,6 +197,7 @@ def compute_cer(edges: List[BeliefEdge], gt: List[Tuple[str, str]]) -> Optional[
 def compute_gcs(edges: List[BeliefEdge], transitions: List[BeliefTransition], k: int = 3) -> Optional[float]:
     valid = 0
     causal_count = 0
+    n_conflict_edges = 0  # conflict edges present, regardless of window coverage
 
     trans_by_cid = defaultdict(list)
     for t in transitions:
@@ -206,6 +207,7 @@ def compute_gcs(edges: List[BeliefEdge], transitions: List[BeliefTransition], k:
     for e in edges:
         if e["relation"] not in ("blocks", "contradicts") or not e.get("target_core_id"):
             continue
+        n_conflict_edges += 1
         target_id = e["target_core_id"]
         t_create = e["created_at_turn"]
 
@@ -238,7 +240,14 @@ def compute_gcs(edges: List[BeliefEdge], transitions: List[BeliefTransition], k:
         if is_causal:
             causal_count += 1
 
-    return causal_count / valid if valid > 0 else None
+    if valid > 0:
+        return causal_count / valid
+    # No testable conflict edge. Distinguish two cases that used to collapse to None:
+    #   (A) conflict edges were declared but none produced downstream movement of its
+    #       target within the window — a causality failure, scored 0.0;
+    #   (B) no conflict edges at all — nothing to measure, so undefined (None).
+    # CER already penalizes the absence of edges, so (B) is not double-scored here.
+    return 0.0 if n_conflict_edges > 0 else None
 
 
 def compute_nrs(transitions: List[BeliefTransition], gt: Dict) -> Optional[float]:
@@ -300,7 +309,10 @@ def compute_iss(nodes: List[BeliefNode], gt: Dict) -> Optional[float]:
     if to_id not in cm:
         return 0.0
     if from_id and from_id not in cm:
-        return None
+        # Symmetric with the missing-target case above: the system failed to build a
+        # concept the metric needs, which is a failure (0.0), not an unmeasurable
+        # scenario (None). (1.1.0; 0 firings in the current corpus.)
+        return 0.0
     from_conf = cm.get(from_id, 0.5) if from_id else 0.5
     gap = cm[to_id] - from_conf
     return min(1.0, max(0.0, (gap - 0.2) / 0.5)) if gap >= 0.2 else 0.0
@@ -317,7 +329,7 @@ def evaluate(
     ban = _validate_integrity(nodes, edges, transitions, messages, raw_state or {}, nonce)
     if ban:
         return {
-            "spec": "1.0.1", "status": "REJECTED", "ban_reason": ban,
+            "spec": "1.1.0", "status": "REJECTED", "ban_reason": ban,
             "reason_code": ban.split(":")[0],
             "scores": {"CER": 0.0, "GCS": 0.0, "BDA": 0.0, "ISS": 0.0, "NRS": 0.0, "PENALTY": ban.split(":")[0]},
             "hash": "sha256:0000",
@@ -334,7 +346,7 @@ def evaluate(
     can_scores = {k: (_dec_str(v) if isinstance(v, float) else v) for k, v in scores.items() if v is not None}
     payload = json.dumps({"s": can_scores, "i": inputs_hash}, sort_keys=True, separators=(',', ':'))
     return {
-        "spec": "1.0.1", "status": "VALIDATED", "ban_reason": None,
+        "spec": "1.1.0", "status": "VALIDATED", "ban_reason": None,
         "scores": scores,
         "hash": "sha256:" + hashlib.sha256(payload.encode()).hexdigest(),
     }

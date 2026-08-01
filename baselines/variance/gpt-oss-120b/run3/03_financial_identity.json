@@ -1,5 +1,5 @@
 {
-  "spec": "1.0.1",
+  "spec": "1.1.0",
   "scenario_id": "03_financial_identity",
   "provider": "cerebras",
   "model": "gpt-oss-120b",

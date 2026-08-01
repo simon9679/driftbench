@@ -1,5 +1,5 @@
 {
-  "spec": "1.0.1",
+  "spec": "1.1.0",
   "scenario_id": "04_failure_recovery_to_launch",
   "provider": "anthropic",
   "model": "claude-haiku-4-5",
@@ -9,7 +9,7 @@
   "run_utc": "2026-07-25T15:34:06.757309+00:00",
   "scores": {
     "CER": 0.5714285714285714,
-    "GCS": null,
+    "GCS": 0.0,
     "BDA": 0.6666666666666666,
     "ISS": 0.4600000000000001,
     "NRS": null

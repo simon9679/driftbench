@@ -47,11 +47,11 @@
       ]
     },
     "GCS": {
-      "mean_before": 0.2969,
-      "mean_after": 0.2969,
+      "mean_before": 0.25,
+      "mean_after": 0.25,
       "pct_unchanged": 100.0,
       "pct_improved_pathological": 0.0,
-      "n_defined_before": 8000,
+      "n_defined_before": 9500,
       "examples_improved": []
     },
     "BDA": {

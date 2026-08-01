@@ -1,5 +1,5 @@
 {
-  "spec": "1.0.1",
+  "spec": "1.1.0",
   "scenario_id": "01_burnout_to_founder",
   "provider": "cerebras",
   "model": "zai-glm-4.7",

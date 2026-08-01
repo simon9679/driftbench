@@ -1,5 +1,5 @@
 {
-  "spec": "1.0.1",
+  "spec": "1.1.0",
   "scenario_id": "11_noise_resistance",
   "provider": "cerebras",
   "model": "gpt-oss-120b",
@@ -7,7 +7,7 @@
   "run_utc": "2026-07-25T15:09:52.197014+00:00",
   "scores": {
     "CER": 0.0,
-    "GCS": null,
+    "GCS": 0.0,
     "BDA": 0.6666666666666666,
     "ISS": 1.0,
     "NRS": 0.0
