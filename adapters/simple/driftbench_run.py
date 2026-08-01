@@ -407,7 +407,7 @@ def print_results(scores: Dict, state: Dict, scenario: Dict, hash_fails: int, ha
 def save_results(scores: Dict, state: Dict, scenario: Dict, provider: str, model: str,
                  out_path: str):
     result = {
-        "spec": "1.0.0",
+        "spec": "1.0.1",
         "provider": provider,
         "model": model,
         "scenario_id": scenario["id"],

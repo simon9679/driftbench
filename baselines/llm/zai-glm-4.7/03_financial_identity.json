@@ -1,5 +1,5 @@
 {
-  "spec": "1.0.0",
+  "spec": "1.0.1",
   "scenario_id": "03_financial_identity",
   "provider": "cerebras",
   "model": "zai-glm-4.7",

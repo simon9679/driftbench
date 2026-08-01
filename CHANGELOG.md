@@ -20,6 +20,28 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ---
 
+## [1.0.1] — 2026-08-01
+
+### Fixed
+- **`NRS = 1.00` on an empty state.** A scored response that failed to parse yielded an
+  empty belief graph, which the Noise Resistance Score rewarded with the maximum (1.00)
+  rather than an undefined result — a system that emitted nothing scored as perfectly
+  noise-resistant. `compute_nrs` now returns *undefined* (`None`) for an empty state (no
+  transitions); a legitimate 1.00 (transitions present, none crossing the noise-turn
+  threshold) is unaffected. Found only by repeated baseline runs (2 of 21 parse failures,
+  both on `11_noise_resistance`; see `baselines/BASELINES.md`). Because scores change on
+  one input (empty-state `NRS` on `11_noise_resistance`: `1.00 → undefined`), the emitted
+  `spec` bumps `1.0.0 → 1.0.1`. The frozen `standard/v1/` ontology and scenarios are
+  untouched.
+
+### Added
+- **`run_baselines.py --rescore`** — recompute `scores` from each saved `state` under
+  `baselines/llm/**` and `baselines/variance/**`, entirely offline (no keys, no network),
+  then regenerate `baselines/BASELINES.md`. Lets historical runs be rescored from frozen
+  artifacts without re-calling any provider; used here to apply the NRS fix to the corpus.
+
+---
+
 ## [1.0.0] — 2026-05-30
 
 ### Added
@@ -61,22 +83,12 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ---
 
-## Known issues
-
-- **`NRS = 1.00` on an empty state.** A scored response that fails to parse yields an
-  empty belief graph, which the Noise Resistance Score rewards with the maximum (1.00)
-  rather than an undefined result — a system that emits nothing scores as perfectly
-  noise-resistant. Found by repeated baseline runs (2 of 21 parse failures, both on
-  `11_noise_resistance`; see `baselines/BASELINES.md`). v1 is frozen, so the behaviour
-  is unchanged in v1; carried to v1.1 as a fix candidate.
-
 ## Upcoming
 
 ### [1.1.0] — planned
 
 - `OCS`: Oscillation Calibration Score — conflicting beliefs settle near calibrated uncertainty
 - `TPS`: Turning Point Score — detects key reversal moments
-- `NRS` empty-state fix: an empty or invalid state should yield an undefined result, not the maximum score (see Known issues)
 - Expanded ontology (v1.1): additional domains beyond career/identity
 
 ### [2.0.0] — planned
