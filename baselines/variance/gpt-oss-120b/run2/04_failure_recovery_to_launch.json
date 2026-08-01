@@ -1,5 +1,5 @@
 {
-  "spec": "1.0.0",
+  "spec": "1.0.1",
   "scenario_id": "04_failure_recovery_to_launch",
   "provider": "cerebras",
   "model": "gpt-oss-120b",

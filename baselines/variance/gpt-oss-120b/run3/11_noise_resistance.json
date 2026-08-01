@@ -1,5 +1,5 @@
 {
-  "spec": "1.0.0",
+  "spec": "1.0.1",
   "scenario_id": "11_noise_resistance",
   "provider": "cerebras",
   "model": "gpt-oss-120b",
@@ -12,7 +12,7 @@
     "GCS": null,
     "BDA": 0.0,
     "ISS": 0.0,
-    "NRS": 1.0
+    "NRS": null
   },
   "note": "parse_error: Expecting ',' delimiter: line 11 column 5 (char 1885)",
   "foreign_core_ids": [],

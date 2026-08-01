@@ -1,7 +1,7 @@
 # DriftBench
 
 [![CI](https://github.com/simon9679/driftbench/actions/workflows/ci.yml/badge.svg)](https://github.com/simon9679/driftbench/actions/workflows/ci.yml)
-[![Version](https://img.shields.io/badge/spec-1.0.0-blue.svg)](standard/SPEC.md)
+[![Version](https://img.shields.io/badge/spec-1.0.1-blue.svg)](standard/SPEC.md)
 [![License](https://img.shields.io/badge/license-Apache--2.0-green.svg)](LICENSE)
 [![CITATION](https://img.shields.io/badge/cite-CITATION.cff-orange.svg)](CITATION.cff)
 
@@ -22,7 +22,7 @@ Output:
 
 ```json
 {
-  "spec": "1.0.0",
+  "spec": "1.0.1",
   "status": "VALIDATED",
   "scores": { "CER": 1.0, "GCS": 1.0, "BDA": 1.0, "ISS": 1.0, "NRS": null }
 }

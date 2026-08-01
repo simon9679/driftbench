@@ -246,6 +246,12 @@ def compute_nrs(transitions: List[BeliefTransition], gt: Dict) -> Optional[float
     if not noise_turns:
         return None
 
+    if not transitions:
+        # Empty state is a non-answer, not noise resistance. Return undefined, not
+        # the maximum: a system that emitted nothing must not be credited for the
+        # fact that nothing moved. (1.0.1 fix; found only via repeated runs.)
+        return None
+
     noise_deltas = [
         t["delta"] for t in transitions
         if t["turn"] in noise_turns and t.get("delta") is not None
@@ -311,7 +317,7 @@ def evaluate(
     ban = _validate_integrity(nodes, edges, transitions, messages, raw_state or {}, nonce)
     if ban:
         return {
-            "spec": "1.0.0", "status": "REJECTED", "ban_reason": ban,
+            "spec": "1.0.1", "status": "REJECTED", "ban_reason": ban,
             "reason_code": ban.split(":")[0],
             "scores": {"CER": 0.0, "GCS": 0.0, "BDA": 0.0, "ISS": 0.0, "NRS": 0.0, "PENALTY": ban.split(":")[0]},
             "hash": "sha256:0000",
@@ -328,7 +334,7 @@ def evaluate(
     can_scores = {k: (_dec_str(v) if isinstance(v, float) else v) for k, v in scores.items() if v is not None}
     payload = json.dumps({"s": can_scores, "i": inputs_hash}, sort_keys=True, separators=(',', ':'))
     return {
-        "spec": "1.0.0", "status": "VALIDATED", "ban_reason": None,
+        "spec": "1.0.1", "status": "VALIDATED", "ban_reason": None,
         "scores": scores,
         "hash": "sha256:" + hashlib.sha256(payload.encode()).hexdigest(),
     }

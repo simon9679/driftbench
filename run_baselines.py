@@ -246,7 +246,7 @@ def run_one(scenario_path, concepts, onto_ids, provider, model, model_dir,
 
     model_dir.mkdir(parents=True, exist_ok=True)
     record = {
-        "spec": "1.0.0",
+        "spec": "1.0.1",
         "scenario_id": sid,
         "provider": provider,
         "model": model,
@@ -396,7 +396,7 @@ def write_baselines_md():
     blocks = "\n".join(_model_block(s) for s in summaries)
     md = f"""# DriftBench LLM Baselines
 
-**Spec:** `1.0.0`  ·  Pure LLM baselines over the 7 official v1 scenarios — the
+**Spec:** `1.0.1`  ·  Pure LLM baselines over the 7 official v1 scenarios — the
 LLM builds the belief graph, scoring uses the canonical `driftbench_core` metrics.
 Dash (—) = metric not applicable to that scenario (null).
 
@@ -429,6 +429,58 @@ valid JSON reliably and are the fair comparison points.
     print(f"  Wrote baselines/BASELINES.md ({len(summaries)} model block(s))")
 
 
+# ─── Offline rescore ─────────────────────────────────────────────────────────
+
+RESCORE_ROOTS = [ROOT / "baselines" / "llm", ROOT / "baselines" / "variance"]
+
+
+def _load_scenario_gts() -> dict:
+    """Map scenario id → ground_truth, read straight from the frozen scenario
+    files (offline, utf-8-sig because some carry a BOM)."""
+    gts = {}
+    for f in SCEN_DIR.glob("*.json"):
+        sc = json.loads(f.read_text("utf-8-sig"))
+        gts[sc["id"]] = sc.get("ground_truth", {})
+    return gts
+
+
+def rescore_all() -> int:
+    """Recompute every saved run's `scores` from its stored `state`, entirely
+    OFFLINE — no keys, no network. Reuses the canonical `score_state`; bumps
+    `spec` to 1.0.1; preserves `state`, `note`, `run_utc`, `provider`, `model`
+    and every other field, plus each file's original BOM. Prints one line per
+    changed metric, e.g. ``…/11_noise_resistance.json: NRS 1.0 → None``.
+    Returns the number of metric values that changed.
+    """
+    gts = _load_scenario_gts()
+    files = sorted(p for root in RESCORE_ROOTS if root.exists()
+                   for p in root.rglob("*.json") if p.name != "summary.json")
+    changed_values = 0
+    for p in files:
+        data = p.read_bytes()
+        had_bom = data.startswith(b"\xef\xbb\xbf")
+        rec = json.loads(data.decode("utf-8-sig"))
+        if "state" not in rec or "scores" not in rec:
+            continue
+        sid = rec.get("scenario_id", p.stem)
+        gt = gts.get(sid)
+        if gt is None:
+            print(f"  (skip {p.relative_to(ROOT).as_posix()}: no ground truth for '{sid}')")
+            continue
+        old = dict(rec.get("scores") or {})
+        new = score_state(rec["state"], gt)
+        for m in METRICS:
+            if old.get(m) != new.get(m):
+                print(f"  {p.relative_to(ROOT).as_posix()}: {m} {old.get(m)} → {new.get(m)}")
+                changed_values += 1
+        rec["scores"] = new
+        rec["spec"] = "1.0.1"
+        text = json.dumps(rec, indent=2, ensure_ascii=False)
+        p.write_text(text, encoding="utf-8-sig" if had_bom else "utf-8")
+    print(f"  rescored {len(files)} files, {changed_values} metric value(s) changed")
+    return changed_values
+
+
 # ─── Main ────────────────────────────────────────────────────────────────────
 
 def main():
@@ -447,7 +499,18 @@ def main():
                     help="override; else provider default")
     ap.add_argument("--reasoning-effort", default="__default__",
                     help="override; else provider default (cerebras=low)")
+    ap.add_argument("--rescore", action="store_true",
+                    help="OFFLINE: recompute scores from saved state for every run "
+                         "under baselines/llm/** and baselines/variance/**, bump spec "
+                         "to 1.0.1, then regenerate BASELINES.md. No keys, no network.")
     args = ap.parse_args()
+
+    if args.rescore:
+        print("\n  Rescoring saved runs offline (no keys, no network)…\n")
+        rescore_all()
+        write_baselines_md()
+        print("\n  Done. Rescored corpus + regenerated baselines/BASELINES.md\n")
+        return
 
     defaults = PROVIDER_DEFAULTS[args.provider]
     max_tokens = args.max_tokens if args.max_tokens is not None else defaults["max_tokens"]

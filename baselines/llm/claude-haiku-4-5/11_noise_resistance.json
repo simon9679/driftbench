@@ -1,5 +1,5 @@
 {
-  "spec": "1.0.0",
+  "spec": "1.0.1",
   "scenario_id": "11_noise_resistance",
   "provider": "anthropic",
   "model": "claude-haiku-4-5",

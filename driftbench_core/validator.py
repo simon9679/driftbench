@@ -7,7 +7,7 @@ from .core import evaluate, _h_dict
 
 def _reject(reason_code: str, message: str) -> dict:
     return {
-        "spec": "1.0.0",
+        "spec": "1.0.1",
         "status": "REJECTED",
         "reason_code": reason_code,
         "ban_reason": message,

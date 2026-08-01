@@ -1,6 +1,6 @@
 # DriftBench LLM Baselines
 
-**Spec:** `1.0.0`  ·  Pure LLM baselines over the 7 official v1 scenarios — the
+**Spec:** `1.0.1`  ·  Pure LLM baselines over the 7 official v1 scenarios — the
 LLM builds the belief graph, scoring uses the canonical `driftbench_core` metrics.
 Dash (—) = metric not applicable to that scenario (null).
 
@@ -65,7 +65,7 @@ Dash (—) = metric not applicable to that scenario (null).
 | 04_failure_recovery_to_launch ⚠ | 0.0000 | — | 0.0000 | 0.0000 | — |
 | 05_promotion_after_launch ⚠ | 0.0000 | — | 0.0000 | 0.0000 | — |
 | 10_delayed_contradiction ⚠ | 0.0000 | — | 0.0000 | 0.0000 | — |
-| 11_noise_resistance ⚠ | 0.0000 | — | 0.0000 | 0.0000 | 1.0000 |
+| 11_noise_resistance ⚠ | 0.0000 | — | 0.0000 | 0.0000 | — |
 | **mean (valid only, n=1)** | 0.2857 | — | 0.7500 | 0.0000 | — |
 
 ## Provenance & honesty note
@@ -166,12 +166,12 @@ Separately, **2 of 21 runs did not parse** (empty state) and are marked `fail`; 
 
 The takeaway is unchanged and is not softened: a single run of a single model on a single scenario is not a measurement — systems must not be ranked on one run.
 
-## Metric defect (v1.1 candidate): empty state scores NRS = 1.00
+## Metric defect (fixed in 1.0.1): empty state scored NRS = 1.00
 
 On repeated runs, 2 of 21 scored responses failed to parse and produced an empty belief graph (`{"nodes": [], "edges": [], "transitions": []}`). The benchmark assigned that empty state **NRS = 1.00 — the maximum** noise-resistance score. On the run that answered, the same scenario scored NRS = 0.00.
 
-This is a defect in the metric's semantics, not a scoring bug: a system that emits nothing is credited with perfect resistance to noise. The logic is understandable (no beliefs, nothing to shift) but the result is absurd and easy to exploit — a silent adapter earns top marks.
+This was a defect in the metric's semantics, not a scoring bug: a system that emits nothing was credited with perfect resistance to noise. The logic was understandable (no beliefs, nothing to shift) but the result absurd and easy to exploit — a silent adapter earned top marks.
 
-**The v1 specification is frozen, so v1 behaviour does not change.** The defect is recorded and carried to v1.1 as a fix candidate. Proposed direction (named, not implemented here): an empty or invalid state should yield an *undefined* result, not a maximum score.
+**Fixed in 1.0.1:** an empty state (no transitions) now yields NRS = *undefined* (`None`), not the maximum. The change is confined to `compute_nrs`; a legitimate 1.00 — transitions present, none crossing the threshold on noise turns — is unaffected.
 
 **This defect was found by repeated runs and could not have been found any other way.** A single run gave NRS = 0.00 on scenario 11 and raised no questions — the same input scored the opposite once its parse failed on repeat. That is the direct point of running more than once.

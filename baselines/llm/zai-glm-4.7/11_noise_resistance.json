@@ -1,5 +1,5 @@
 {
-  "spec": "1.0.0",
+  "spec": "1.0.1",
   "scenario_id": "11_noise_resistance",
   "provider": "cerebras",
   "model": "zai-glm-4.7",
@@ -10,7 +10,7 @@
     "GCS": null,
     "BDA": 0.0,
     "ISS": 0.0,
-    "NRS": 1.0
+    "NRS": null
   },
   "foreign_core_ids": [],
   "state": {

@@ -1,5 +1,5 @@
 {
-  "spec": "1.0.0",
+  "spec": "1.0.1",
   "scenario_id": "02_promotion_vs_founder",
   "provider": "anthropic",
   "model": "claude-haiku-4-5",

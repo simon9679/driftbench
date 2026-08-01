@@ -321,6 +321,11 @@ def test_C10_nrs_perfect_when_all_noise_deltas_below_threshold():
     assert compute_nrs(trs, gt) == 1.0
 
 
+def test_C11_nrs_undefined_on_empty_state():
+    """Empty state → undefined, not the maximum (1.0.1 fix)."""
+    assert compute_nrs([], {"noise_turns": [1, 2]}) is None
+
+
 # ===========================================================================
 # Group D — evaluate() end-to-end
 # ===========================================================================
